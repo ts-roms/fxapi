@@ -1,9 +1,9 @@
 import {
-    HttpStatus,
-    Module,
-    UnprocessableEntityException,
-    ValidationError,
-    ValidationPipe,
+  HttpStatus,
+  Module,
+  UnprocessableEntityException,
+  ValidationError,
+  ValidationPipe,
 } from '@nestjs/common';
 import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { RequestTimeoutInterceptor } from 'src/common/request/interceptors/request.timeout.interceptor';
@@ -26,47 +26,47 @@ import { SkipConstraint } from './validations/request.skip.validation';
 import { MaxBinaryFileConstraint } from 'src/common/request/validations/request.max-binary-file.validation';
 
 @Module({
-    controllers: [],
-    providers: [
-        {
-            provide: APP_INTERCEPTOR,
-            useClass: RequestTimeoutInterceptor,
-        },
-        {
-            provide: APP_PIPE,
-            useFactory: () =>
-                new ValidationPipe({
-                    transform: true,
-                    skipNullProperties: false,
-                    skipUndefinedProperties: false,
-                    skipMissingProperties: false,
-                    forbidUnknownValues: false,
-                    errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
-                    exceptionFactory: async (errors: ValidationError[]) =>
-                        new UnprocessableEntityException({
-                            statusCode:
-                                ENUM_REQUEST_STATUS_CODE_ERROR.REQUEST_VALIDATION_ERROR,
-                            message: 'request.validation',
-                            errors,
-                        }),
-                }),
-        },
-        IsPasswordStrongConstraint,
-        IsPasswordMediumConstraint,
-        IsPasswordWeakConstraint,
-        IsStartWithConstraint,
-        MaxGreaterThanEqualConstraint,
-        MaxGreaterThanConstraint,
-        MinGreaterThanEqualConstraint,
-        MinGreaterThanConstraint,
-        SkipConstraint,
-        SafeStringConstraint,
-        IsOnlyDigitsConstraint,
-        MinDateTodayConstraint,
-        MobileNumberAllowedConstraint,
-        MaxDateTodayConstraint,
-        MaxBinaryFileConstraint,
-    ],
-    imports: [RequestMiddlewareModule],
+  controllers: [],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: RequestTimeoutInterceptor,
+    },
+    {
+      provide: APP_PIPE,
+      useFactory: () =>
+        new ValidationPipe({
+          transform: true,
+          skipNullProperties: false,
+          skipUndefinedProperties: false,
+          skipMissingProperties: false,
+          forbidUnknownValues: false,
+          errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+          exceptionFactory: async (errors: ValidationError[]) =>
+            new UnprocessableEntityException({
+              statusCode:
+                ENUM_REQUEST_STATUS_CODE_ERROR.REQUEST_VALIDATION_ERROR,
+              message: 'request.validation',
+              errors,
+            }),
+        }),
+    },
+    IsPasswordStrongConstraint,
+    IsPasswordMediumConstraint,
+    IsPasswordWeakConstraint,
+    IsStartWithConstraint,
+    MaxGreaterThanEqualConstraint,
+    MaxGreaterThanConstraint,
+    MinGreaterThanEqualConstraint,
+    MinGreaterThanConstraint,
+    SkipConstraint,
+    SafeStringConstraint,
+    IsOnlyDigitsConstraint,
+    MinDateTodayConstraint,
+    MobileNumberAllowedConstraint,
+    MaxDateTodayConstraint,
+    MaxBinaryFileConstraint,
+  ],
+  imports: [RequestMiddlewareModule],
 })
 export class RequestModule {}

@@ -11,21 +11,21 @@ import { UserController } from 'src/modules/user/controllers/user.controller';
 import { UserModule } from 'src/modules/user/user.module';
 
 @Module({
-    controllers: [
-        HealthController,
-        SettingController,
-        UserController,
-        MessageController,
-    ],
-    providers: [],
-    exports: [],
-    imports: [
-        AwsModule,
-        TerminusModule,
-        UserModule,
-        AuthModule,
-        HealthModule,
-        RoleModule,
-    ],
+  controllers: [
+    HealthController,
+    SettingController,
+    UserController,
+    MessageController,
+  ],
+  providers: [],
+  exports: [],
+  imports: [
+    AwsModule,
+    TerminusModule,
+    UserModule,
+    AuthModule,
+    HealthModule,
+    RoleModule,
+  ],
 })
 export class RoutesModule {}

@@ -4,7 +4,7 @@ import { IPermissionEnumService } from 'src/modules/permission/interfaces/permis
 
 @Injectable()
 export class PermissionEnumService implements IPermissionEnumService {
-    async getGroup(): Promise<string[]> {
-        return Object.values(ENUM_PERMISSION_GROUP);
-    }
+  async getGroup(): Promise<string[]> {
+    return Object.values(ENUM_PERMISSION_GROUP);
+  }
 }

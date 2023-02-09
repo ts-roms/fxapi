@@ -6,50 +6,48 @@ import { IPaginationFilterStringEqualOptions } from 'src/common/pagination/inter
 import { PaginationService } from 'src/common/pagination/services/pagination.service';
 
 export function PaginationFilterEqualPipe(
-    options?: IPaginationFilterStringEqualOptions
+  options?: IPaginationFilterStringEqualOptions
 ): Type<PipeTransform> {
-    @Injectable()
-    class MixinPaginationFilterEqualPipe implements PipeTransform {
-        constructor(
-            private readonly paginationService: PaginationService,
-            private readonly helperNumberService: HelperNumberService
-        ) {}
+  @Injectable()
+  class MixinPaginationFilterEqualPipe implements PipeTransform {
+    constructor(
+      private readonly paginationService: PaginationService,
+      private readonly helperNumberService: HelperNumberService
+    ) {}
 
-        async transform(
-            value: string,
-            { data: field }: ArgumentMetadata
-        ): Promise<Record<string, string | number>> {
-            if (!value) {
-                return undefined;
-            }
+    async transform(
+      value: string,
+      { data: field }: ArgumentMetadata
+    ): Promise<Record<string, string | number>> {
+      if (!value) {
+        return undefined;
+      }
 
-            if (
-                options?.case === ENUM_PAGINATION_FILTER_CASE_OPTIONS.UPPERCASE
-            ) {
-                value = value.toUpperCase();
-            } else if (
-                options?.case === ENUM_PAGINATION_FILTER_CASE_OPTIONS.LOWERCASE
-            ) {
-                value = value.toUpperCase();
-            }
+      if (options?.case === ENUM_PAGINATION_FILTER_CASE_OPTIONS.UPPERCASE) {
+        value = value.toUpperCase();
+      } else if (
+        options?.case === ENUM_PAGINATION_FILTER_CASE_OPTIONS.LOWERCASE
+      ) {
+        value = value.toUpperCase();
+      }
 
-            if (options?.trim) {
-                value = value.trim();
-            }
+      if (options?.trim) {
+        value = value.trim();
+      }
 
-            let finalValue: string | number = value;
-            if (options?.isNumber) {
-                finalValue = this.helperNumberService.check(value)
-                    ? this.helperNumberService.create(value)
-                    : value;
-            }
+      let finalValue: string | number = value;
+      if (options?.isNumber) {
+        finalValue = this.helperNumberService.check(value)
+          ? this.helperNumberService.create(value)
+          : value;
+      }
 
-            return this.paginationService.filterEqual<string | number>(
-                field,
-                finalValue
-            );
-        }
+      return this.paginationService.filterEqual<string | number>(
+        field,
+        finalValue
+      );
     }
+  }
 
-    return mixin(MixinPaginationFilterEqualPipe);
+  return mixin(MixinPaginationFilterEqualPipe);
 }

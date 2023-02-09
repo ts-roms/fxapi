@@ -5,9 +5,9 @@ import { UserPublicController } from 'src/modules/user/controllers/user.public.c
 import { UserModule } from 'src/modules/user/user.module';
 
 @Module({
-    controllers: [UserPublicController],
-    providers: [],
-    exports: [],
-    imports: [UserModule, AuthModule, RoleModule],
+  controllers: [UserPublicController],
+  providers: [],
+  exports: [],
+  imports: [UserModule, AuthModule, RoleModule],
 })
 export class RoutesPublicModule {}

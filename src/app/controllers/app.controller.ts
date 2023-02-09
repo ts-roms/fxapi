@@ -14,59 +14,59 @@ import { IResult } from 'ua-parser-js';
 
 @ApiTags('hello')
 @Controller({
-    version: VERSION_NEUTRAL,
-    path: '/',
+  version: VERSION_NEUTRAL,
+  path: '/',
 })
 export class AppController {
-    private readonly serviceName: string;
+  private readonly serviceName: string;
 
-    constructor(
-        private readonly configService: ConfigService,
-        private readonly helperDateService: HelperDateService
-    ) {
-        this.serviceName = this.configService.get<string>('app.name');
-    }
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly helperDateService: HelperDateService
+  ) {
+    this.serviceName = this.configService.get<string>('app.name');
+  }
 
-    @AppHelloDoc()
-    @Response('app.hello', { serialization: AppHelloSerialization })
-    @Logger(ENUM_LOGGER_ACTION.TEST, { tags: ['test'] })
-    @Get('/hello')
-    async hello(@RequestUserAgent() userAgent: IResult): Promise<IResponse> {
-        const newDate = this.helperDateService.create();
+  @AppHelloDoc()
+  @Response('app.hello', { serialization: AppHelloSerialization })
+  @Logger(ENUM_LOGGER_ACTION.TEST, { tags: ['test'] })
+  @Get('/hello')
+  async hello(@RequestUserAgent() userAgent: IResult): Promise<IResponse> {
+    const newDate = this.helperDateService.create();
 
-        return {
-            _metadata: {
-                properties: {
-                    serviceName: this.serviceName,
-                },
-            },
-            userAgent,
-            date: newDate,
-            format: this.helperDateService.format(newDate),
-            timestamp: this.helperDateService.timestamp(newDate),
-        };
-    }
+    return {
+      _metadata: {
+        properties: {
+          serviceName: this.serviceName,
+        },
+      },
+      userAgent,
+      date: newDate,
+      format: this.helperDateService.format(newDate),
+      timestamp: this.helperDateService.timestamp(newDate),
+    };
+  }
 
-    @AppHelloApiKeyDoc()
-    @Response('app.hello', { serialization: AppHelloSerialization })
-    @Logger(ENUM_LOGGER_ACTION.TEST, { tags: ['test'] })
-    @ApiKeyProtected()
-    @Get('/hello/api-key')
-    async helloApiKey(
-        @RequestUserAgent() userAgent: IResult
-    ): Promise<IResponse> {
-        const newDate = this.helperDateService.create();
+  @AppHelloApiKeyDoc()
+  @Response('app.hello', { serialization: AppHelloSerialization })
+  @Logger(ENUM_LOGGER_ACTION.TEST, { tags: ['test'] })
+  @ApiKeyProtected()
+  @Get('/hello/api-key')
+  async helloApiKey(
+    @RequestUserAgent() userAgent: IResult
+  ): Promise<IResponse> {
+    const newDate = this.helperDateService.create();
 
-        return {
-            _metadata: {
-                properties: {
-                    serviceName: this.serviceName,
-                },
-            },
-            userAgent,
-            date: newDate,
-            format: this.helperDateService.format(newDate),
-            timestamp: this.helperDateService.timestamp(newDate),
-        };
-    }
+    return {
+      _metadata: {
+        properties: {
+          serviceName: this.serviceName,
+        },
+      },
+      userAgent,
+      date: newDate,
+      format: this.helperDateService.format(newDate),
+      timestamp: this.helperDateService.timestamp(newDate),
+    };
+  }
 }

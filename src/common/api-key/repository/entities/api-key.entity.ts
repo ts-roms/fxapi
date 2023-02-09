@@ -7,68 +7,68 @@ export const ApiKeyDatabaseName = 'apikeys';
 
 @DatabaseEntity({ collection: ApiKeyDatabaseName })
 export class ApiKeyEntity extends DatabaseMongoUUIDEntityAbstract {
-    @Prop({
-        required: true,
-        index: true,
-        type: String,
-        minlength: 1,
-        maxlength: 100,
-        lowercase: true,
-        trim: true,
-    })
-    name: string;
+  @Prop({
+    required: true,
+    index: true,
+    type: String,
+    minlength: 1,
+    maxlength: 100,
+    lowercase: true,
+    trim: true,
+  })
+  name: string;
 
-    @Prop({
-        required: false,
-        type: String,
-        minlength: 1,
-        maxlength: 255,
-    })
-    description?: string;
+  @Prop({
+    required: false,
+    type: String,
+    minlength: 1,
+    maxlength: 255,
+  })
+  description?: string;
 
-    @Prop({
-        required: true,
-        type: String,
-        unique: true,
-        index: true,
-        trim: true,
-    })
-    key: string;
+  @Prop({
+    required: true,
+    type: String,
+    unique: true,
+    index: true,
+    trim: true,
+  })
+  key: string;
 
-    @Prop({
-        required: true,
-        trim: true,
-        type: String,
-    })
-    hash: string;
+  @Prop({
+    required: true,
+    trim: true,
+    type: String,
+  })
+  hash: string;
 
-    @Prop({
-        required: true,
-        index: true,
-        type: Boolean,
-    })
-    isActive: boolean;
+  @Prop({
+    required: true,
+    index: true,
+    type: Boolean,
+  })
+  isActive: boolean;
 
-    @Prop({
-        required: false,
-        type: Date,
-    })
-    startDate?: Date;
+  @Prop({
+    required: false,
+    type: Date,
+  })
+  startDate?: Date;
 
-    @Prop({
-        required: false,
-        type: Date,
-    })
-    endDate?: Date;
+  @Prop({
+    required: false,
+    type: Date,
+  })
+  endDate?: Date;
 }
 
 export const ApiKeySchema = SchemaFactory.createForClass(ApiKeyEntity);
 
 ApiKeySchema.pre(
-    'save',
-    function (next: CallbackWithoutResultAndOptionalError) {
-        this.name = this.name.toLowerCase();
+  'save',
+  function (next: CallbackWithoutResultAndOptionalError) {
+    this.name = this.name.toLowerCase();
 
-        next();
-    }
+    next();
+  }
 );

@@ -8,52 +8,52 @@ import { RoutesTestModule } from './routes/routes.test.module';
 
 @Module({})
 export class RouterModule {
-    static forRoot(): DynamicModule {
-        const imports: (
-            | DynamicModule
-            | Type<any>
-            | Promise<DynamicModule>
-            | ForwardReference<any>
-        )[] = [];
+  static forRoot(): DynamicModule {
+    const imports: (
+      | DynamicModule
+      | Type<any>
+      | Promise<DynamicModule>
+      | ForwardReference<any>
+    )[] = [];
 
-        if (process.env.HTTP_ENABLE === 'true') {
-            imports.push(
-                RoutesModule,
-                RoutesTestModule,
-                RoutesPublicModule,
-                RoutesAdminModule,
-                RoutesCallbackModule,
-                NestJsRouterModule.register([
-                    {
-                        path: '/',
-                        module: RoutesModule,
-                    },
-                    {
-                        path: '/test',
-                        module: RoutesTestModule,
-                    },
-                    {
-                        path: '/public',
-                        module: RoutesPublicModule,
-                    },
-                    {
-                        path: '/admin',
-                        module: RoutesAdminModule,
-                    },
-                    {
-                        path: '/callback',
-                        module: RoutesCallbackModule,
-                    },
-                ])
-            );
-        }
-
-        return {
-            module: RouterModule,
-            providers: [],
-            exports: [],
-            controllers: [],
-            imports,
-        };
+    if (process.env.HTTP_ENABLE === 'true') {
+      imports.push(
+        RoutesModule,
+        RoutesTestModule,
+        RoutesPublicModule,
+        RoutesAdminModule,
+        RoutesCallbackModule,
+        NestJsRouterModule.register([
+          {
+            path: '/',
+            module: RoutesModule,
+          },
+          {
+            path: '/test',
+            module: RoutesTestModule,
+          },
+          {
+            path: '/public',
+            module: RoutesPublicModule,
+          },
+          {
+            path: '/admin',
+            module: RoutesAdminModule,
+          },
+          {
+            path: '/callback',
+            module: RoutesCallbackModule,
+          },
+        ])
+      );
     }
+
+    return {
+      module: RouterModule,
+      providers: [],
+      exports: [],
+      controllers: [],
+      imports,
+    };
+  }
 }

@@ -5,14 +5,14 @@ import { IRequestApp } from 'src/common/request/interfaces/request.interface';
 
 @Injectable()
 export class RequestIdMiddleware implements NestMiddleware {
-    async use(
-        req: IRequestApp,
-        res: Response,
-        next: NextFunction
-    ): Promise<void> {
-        const uuid: string = DatabaseDefaultUUID();
-        req.headers['x-request-id'] = uuid;
-        req.id = uuid;
-        next();
-    }
+  async use(
+    req: IRequestApp,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    const uuid: string = DatabaseDefaultUUID();
+    req.headers['x-request-id'] = uuid;
+    req.id = uuid;
+    next();
+  }
 }

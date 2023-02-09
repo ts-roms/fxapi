@@ -3,7 +3,7 @@ import { ResponseTimeMiddleware } from 'src/common/response/middleware/time/resp
 
 @Module({})
 export class ResponseMiddlewareModule implements NestModule {
-    configure(consumer: MiddlewareConsumer): void {
-        consumer.apply(ResponseTimeMiddleware).forRoutes('*');
-    }
+  configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(ResponseTimeMiddleware).forRoutes('*');
+  }
 }

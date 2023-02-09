@@ -3,7 +3,7 @@ import { MessageCustomLanguageMiddleware } from 'src/common/message/middleware/c
 
 @Module({})
 export class MessageMiddlewareModule implements NestModule {
-    configure(consumer: MiddlewareConsumer): void {
-        consumer.apply(MessageCustomLanguageMiddleware).forRoutes('*');
-    }
+  configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(MessageCustomLanguageMiddleware).forRoutes('*');
+  }
 }

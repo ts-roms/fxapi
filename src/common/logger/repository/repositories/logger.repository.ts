@@ -7,14 +7,14 @@ import { LoggerEntity } from 'src/common/logger/repository/entities/logger.entit
 
 @Injectable()
 export class LoggerRepository extends DatabaseMongoUUIDRepositoryAbstract<LoggerEntity> {
-    constructor(
-        @DatabaseModel(LoggerEntity.name)
-        private readonly loggerModel: Model<LoggerEntity>
-    ) {
-        super(loggerModel, {
-            path: 'apiKey',
-            match: '_id',
-            model: ApiKeyEntity.name,
-        });
-    }
+  constructor(
+    @DatabaseModel(LoggerEntity.name)
+    private readonly loggerModel: Model<LoggerEntity>
+  ) {
+    super(loggerModel, {
+      path: 'apiKey',
+      match: '_id',
+      model: ApiKeyEntity.name,
+    });
+  }
 }

@@ -2,6 +2,6 @@ import { ENUM_PERMISSION_GROUP } from 'src/modules/permission/constants/permissi
 import { PermissionEntity } from 'src/modules/permission/repository/entities/permission.entity';
 
 export interface IPermissionGroup {
-    group: ENUM_PERMISSION_GROUP;
-    permissions: PermissionEntity[];
+  group: ENUM_PERMISSION_GROUP;
+  permissions: PermissionEntity[];
 }

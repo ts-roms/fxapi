@@ -6,36 +6,34 @@ import { IPaginationFilterDateOptions } from 'src/common/pagination/interfaces/p
 import { PaginationService } from 'src/common/pagination/services/pagination.service';
 
 export function PaginationFilterDatePipe(
-    options?: IPaginationFilterDateOptions
+  options?: IPaginationFilterDateOptions
 ): Type<PipeTransform> {
-    @Injectable()
-    class MixinPaginationFilterDatePipe implements PipeTransform {
-        constructor(
-            private readonly paginationService: PaginationService,
-            private readonly helperDateService: HelperDateService
-        ) {}
+  @Injectable()
+  class MixinPaginationFilterDatePipe implements PipeTransform {
+    constructor(
+      private readonly paginationService: PaginationService,
+      private readonly helperDateService: HelperDateService
+    ) {}
 
-        async transform(
-            value: string,
-            { data: field }: ArgumentMetadata
-        ): Promise<Record<string, Date>> {
-            let date: Date = this.helperDateService.create(value);
+    async transform(
+      value: string,
+      { data: field }: ArgumentMetadata
+    ): Promise<Record<string, Date>> {
+      let date: Date = this.helperDateService.create(value);
 
-            if (
-                options?.time ===
-                ENUM_PAGINATION_FILTER_DATE_TIME_OPTIONS.END_OF_DAY
-            ) {
-                date = this.helperDateService.endOfDay(date);
-            } else if (
-                options?.time ===
-                ENUM_PAGINATION_FILTER_DATE_TIME_OPTIONS.START_OF_DAY
-            ) {
-                date = this.helperDateService.startOfDay(date);
-            }
+      if (
+        options?.time === ENUM_PAGINATION_FILTER_DATE_TIME_OPTIONS.END_OF_DAY
+      ) {
+        date = this.helperDateService.endOfDay(date);
+      } else if (
+        options?.time === ENUM_PAGINATION_FILTER_DATE_TIME_OPTIONS.START_OF_DAY
+      ) {
+        date = this.helperDateService.startOfDay(date);
+      }
 
-            return this.paginationService.filterDate(field, date);
-        }
+      return this.paginationService.filterDate(field, date);
     }
+  }
 
-    return mixin(MixinPaginationFilterDatePipe);
+  return mixin(MixinPaginationFilterDatePipe);
 }

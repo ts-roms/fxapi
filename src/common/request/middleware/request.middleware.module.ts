@@ -1,9 +1,9 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import {
-    RequestJsonBodyParserMiddleware,
-    RequestRawBodyParserMiddleware,
-    RequestTextBodyParserMiddleware,
-    RequestUrlencodedBodyParserMiddleware,
+  RequestJsonBodyParserMiddleware,
+  RequestRawBodyParserMiddleware,
+  RequestTextBodyParserMiddleware,
+  RequestUrlencodedBodyParserMiddleware,
 } from 'src/common/request/middleware/body-parser/request.body-parser.middleware';
 import { RequestCorsMiddleware } from 'src/common/request/middleware/cors/request.cors.middleware';
 import { RequestHelmetMiddleware } from 'src/common/request/middleware/helmet/request.helmet.middleware';
@@ -13,19 +13,19 @@ import { RequestVersionMiddleware } from 'src/common/request/middleware/version/
 
 @Module({})
 export class RequestMiddlewareModule implements NestModule {
-    configure(consumer: MiddlewareConsumer): void {
-        consumer
-            .apply(
-                RequestHelmetMiddleware,
-                RequestRateLimitMiddleware,
-                RequestIdMiddleware,
-                RequestJsonBodyParserMiddleware,
-                RequestTextBodyParserMiddleware,
-                RequestRawBodyParserMiddleware,
-                RequestUrlencodedBodyParserMiddleware,
-                RequestCorsMiddleware,
-                RequestVersionMiddleware
-            )
-            .forRoutes('*');
-    }
+  configure(consumer: MiddlewareConsumer): void {
+    consumer
+      .apply(
+        RequestHelmetMiddleware,
+        RequestRateLimitMiddleware,
+        RequestIdMiddleware,
+        RequestJsonBodyParserMiddleware,
+        RequestTextBodyParserMiddleware,
+        RequestRawBodyParserMiddleware,
+        RequestUrlencodedBodyParserMiddleware,
+        RequestCorsMiddleware,
+        RequestVersionMiddleware
+      )
+      .forRoutes('*');
+  }
 }

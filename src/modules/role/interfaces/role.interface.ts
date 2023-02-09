@@ -2,5 +2,5 @@ import { PermissionEntity } from 'src/modules/permission/repository/entities/per
 import { RoleEntity } from 'src/modules/role/repository/entities/role.entity';
 
 export interface IRoleEntity extends Omit<RoleEntity, 'permissions'> {
-    permissions: PermissionEntity[];
+  permissions: PermissionEntity[];
 }

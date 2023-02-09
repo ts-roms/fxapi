@@ -5,37 +5,35 @@ import { IPaginationFilterStringContainOptions } from 'src/common/pagination/int
 import { PaginationService } from 'src/common/pagination/services/pagination.service';
 
 export function PaginationFilterContainPipe(
-    options?: IPaginationFilterStringContainOptions
+  options?: IPaginationFilterStringContainOptions
 ): Type<PipeTransform> {
-    @Injectable()
-    class MixinPaginationFilterContainPipe implements PipeTransform {
-        constructor(private readonly paginationService: PaginationService) {}
+  @Injectable()
+  class MixinPaginationFilterContainPipe implements PipeTransform {
+    constructor(private readonly paginationService: PaginationService) {}
 
-        async transform(
-            value: string,
-            { data: field }: ArgumentMetadata
-        ): Promise<Record<string, { $regex: RegExp; $options: string }>> {
-            if (!value) {
-                value = '';
-            }
+    async transform(
+      value: string,
+      { data: field }: ArgumentMetadata
+    ): Promise<Record<string, { $regex: RegExp; $options: string }>> {
+      if (!value) {
+        value = '';
+      }
 
-            if (
-                options?.case === ENUM_PAGINATION_FILTER_CASE_OPTIONS.UPPERCASE
-            ) {
-                value = value.toUpperCase();
-            } else if (
-                options?.case === ENUM_PAGINATION_FILTER_CASE_OPTIONS.LOWERCASE
-            ) {
-                value = value.toUpperCase();
-            }
+      if (options?.case === ENUM_PAGINATION_FILTER_CASE_OPTIONS.UPPERCASE) {
+        value = value.toUpperCase();
+      } else if (
+        options?.case === ENUM_PAGINATION_FILTER_CASE_OPTIONS.LOWERCASE
+      ) {
+        value = value.toUpperCase();
+      }
 
-            if (options?.trim) {
-                value = value.trim();
-            }
+      if (options?.trim) {
+        value = value.trim();
+      }
 
-            return this.paginationService.filterContain(field, value);
-        }
+      return this.paginationService.filterContain(field, value);
     }
+  }
 
-    return mixin(MixinPaginationFilterContainPipe);
+  return mixin(MixinPaginationFilterContainPipe);
 }

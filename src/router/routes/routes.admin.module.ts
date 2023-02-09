@@ -11,21 +11,15 @@ import { UserAdminController } from 'src/modules/user/controllers/user.admin.con
 import { UserModule } from 'src/modules/user/user.module';
 
 @Module({
-    controllers: [
-        SettingAdminController,
-        PermissionAdminController,
-        RoleAdminController,
-        UserAdminController,
-        ApiKeyAdminController,
-    ],
-    providers: [],
-    exports: [],
-    imports: [
-        PermissionModule,
-        RoleModule,
-        UserModule,
-        AuthModule,
-        ApiKeyModule,
-    ],
+  controllers: [
+    SettingAdminController,
+    PermissionAdminController,
+    RoleAdminController,
+    UserAdminController,
+    ApiKeyAdminController,
+  ],
+  providers: [],
+  exports: [],
+  imports: [PermissionModule, RoleModule, UserModule, AuthModule, ApiKeyModule],
 })
 export class RoutesAdminModule {}

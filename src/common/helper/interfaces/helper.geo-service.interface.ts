@@ -1,8 +1,8 @@
 import {
-    IHelperGeoCurrent,
-    IHelperGeoRules,
+  IHelperGeoCurrent,
+  IHelperGeoRules,
 } from 'src/common/helper/interfaces/helper.interface';
 
 export interface IHelperGeoService {
-    inRadius(geoRule: IHelperGeoRules, geoCurrent: IHelperGeoCurrent): boolean;
+  inRadius(geoRule: IHelperGeoRules, geoCurrent: IHelperGeoCurrent): boolean;
 }

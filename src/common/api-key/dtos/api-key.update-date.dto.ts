@@ -6,27 +6,27 @@ import { MinGreaterThanEqual } from 'src/common/request/validations/request.min-
 import { MinDateToday } from 'src/common/request/validations/request.min-date-today.validation';
 
 export class ApiKeyUpdateDateDto {
-    @ApiProperty({
-        description: 'Api Key start date',
-        example: faker.date.recent(),
-        required: false,
-        nullable: true,
-    })
-    @IsNotEmpty()
-    @Type(() => Date)
-    @IsDate()
-    @MinDateToday()
-    startDate: Date;
+  @ApiProperty({
+    description: 'Api Key start date',
+    example: faker.date.recent(),
+    required: false,
+    nullable: true,
+  })
+  @IsNotEmpty()
+  @Type(() => Date)
+  @IsDate()
+  @MinDateToday()
+  startDate: Date;
 
-    @ApiProperty({
-        description: 'Api Key end date',
-        example: faker.date.recent(),
-        required: false,
-        nullable: true,
-    })
-    @IsNotEmpty()
-    @Type(() => Date)
-    @IsDate()
-    @MinGreaterThanEqual('startDate')
-    endDate: Date;
+  @ApiProperty({
+    description: 'Api Key end date',
+    example: faker.date.recent(),
+    required: false,
+    nullable: true,
+  })
+  @IsNotEmpty()
+  @Type(() => Date)
+  @IsDate()
+  @MinGreaterThanEqual('startDate')
+  endDate: Date;
 }

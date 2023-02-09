@@ -4,8 +4,8 @@ import { LoggerService } from './services/logger.service';
 
 @Global()
 @Module({
-    providers: [LoggerService],
-    exports: [LoggerService],
-    imports: [LoggerRepositoryModule],
+  providers: [LoggerService],
+  exports: [LoggerService],
+  imports: [LoggerRepositoryModule],
 })
 export class LoggerModule {}

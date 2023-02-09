@@ -6,55 +6,55 @@ import { ApiKeyNotFoundGuard } from 'src/common/api-key/guards/api-key.not-found
 import { ApiKeyPutToRequestGuard } from 'src/common/api-key/guards/api-key.put-to-request.guard';
 
 export function ApiKeyGetGuard(): MethodDecorator {
-    return applyDecorators(
-        UseGuards(ApiKeyPutToRequestGuard, ApiKeyNotFoundGuard)
-    );
+  return applyDecorators(
+    UseGuards(ApiKeyPutToRequestGuard, ApiKeyNotFoundGuard)
+  );
 }
 
 export function ApiKeyUpdateGuard(): MethodDecorator {
-    return applyDecorators(
-        UseGuards(
-            ApiKeyPutToRequestGuard,
-            ApiKeyNotFoundGuard,
-            ApiKeyActiveGuard,
-            ApiKeyExpiredGuard
-        ),
-        SetMetadata(API_KEY_ACTIVE_META_KEY, [true])
-    );
+  return applyDecorators(
+    UseGuards(
+      ApiKeyPutToRequestGuard,
+      ApiKeyNotFoundGuard,
+      ApiKeyActiveGuard,
+      ApiKeyExpiredGuard
+    ),
+    SetMetadata(API_KEY_ACTIVE_META_KEY, [true])
+  );
 }
 
 export function ApiKeyUpdateResetGuard(): MethodDecorator {
-    return applyDecorators(
-        UseGuards(
-            ApiKeyPutToRequestGuard,
-            ApiKeyNotFoundGuard,
-            ApiKeyActiveGuard,
-            ApiKeyExpiredGuard
-        ),
-        SetMetadata(API_KEY_ACTIVE_META_KEY, [true])
-    );
+  return applyDecorators(
+    UseGuards(
+      ApiKeyPutToRequestGuard,
+      ApiKeyNotFoundGuard,
+      ApiKeyActiveGuard,
+      ApiKeyExpiredGuard
+    ),
+    SetMetadata(API_KEY_ACTIVE_META_KEY, [true])
+  );
 }
 
 export function ApiKeyUpdateActiveGuard(): MethodDecorator {
-    return applyDecorators(
-        UseGuards(
-            ApiKeyPutToRequestGuard,
-            ApiKeyNotFoundGuard,
-            ApiKeyActiveGuard,
-            ApiKeyExpiredGuard
-        ),
-        SetMetadata(API_KEY_ACTIVE_META_KEY, [false])
-    );
+  return applyDecorators(
+    UseGuards(
+      ApiKeyPutToRequestGuard,
+      ApiKeyNotFoundGuard,
+      ApiKeyActiveGuard,
+      ApiKeyExpiredGuard
+    ),
+    SetMetadata(API_KEY_ACTIVE_META_KEY, [false])
+  );
 }
 
 export function ApiKeyUpdateInactiveGuard(): MethodDecorator {
-    return applyDecorators(
-        UseGuards(
-            ApiKeyPutToRequestGuard,
-            ApiKeyNotFoundGuard,
-            ApiKeyActiveGuard,
-            ApiKeyExpiredGuard
-        ),
-        SetMetadata(API_KEY_ACTIVE_META_KEY, [true])
-    );
+  return applyDecorators(
+    UseGuards(
+      ApiKeyPutToRequestGuard,
+      ApiKeyNotFoundGuard,
+      ApiKeyActiveGuard,
+      ApiKeyExpiredGuard
+    ),
+    SetMetadata(API_KEY_ACTIVE_META_KEY, [true])
+  );
 }

@@ -12,42 +12,40 @@ import { HelperGeoService } from './services/helper.geo.service';
 
 @Global()
 @Module({
-    providers: [
-        HelperArrayService,
-        HelperDateService,
-        HelperEncryptionService,
-        HelperHashService,
-        HelperNumberService,
-        HelperStringService,
-        HelperFileService,
-        HelperGeoService,
-    ],
-    exports: [
-        HelperArrayService,
-        HelperDateService,
-        HelperEncryptionService,
-        HelperHashService,
-        HelperNumberService,
-        HelperStringService,
-        HelperFileService,
-        HelperGeoService,
-    ],
-    controllers: [],
-    imports: [
-        JwtModule.registerAsync({
-            inject: [ConfigService],
-            imports: [ConfigModule],
-            useFactory: (configService: ConfigService) => ({
-                secret: configService.get<string>(
-                    'helper.jwt.defaultSecretKey'
-                ),
-                signOptions: {
-                    expiresIn: configService.get<string>(
-                        'helper.jwt.defaultExpirationTime'
-                    ),
-                },
-            }),
-        }),
-    ],
+  providers: [
+    HelperArrayService,
+    HelperDateService,
+    HelperEncryptionService,
+    HelperHashService,
+    HelperNumberService,
+    HelperStringService,
+    HelperFileService,
+    HelperGeoService,
+  ],
+  exports: [
+    HelperArrayService,
+    HelperDateService,
+    HelperEncryptionService,
+    HelperHashService,
+    HelperNumberService,
+    HelperStringService,
+    HelperFileService,
+    HelperGeoService,
+  ],
+  controllers: [],
+  imports: [
+    JwtModule.registerAsync({
+      inject: [ConfigService],
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>('helper.jwt.defaultSecretKey'),
+        signOptions: {
+          expiresIn: configService.get<string>(
+            'helper.jwt.defaultExpirationTime'
+          ),
+        },
+      }),
+    }),
+  ],
 })
 export class HelperModule {}

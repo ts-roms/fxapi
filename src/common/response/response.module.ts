@@ -4,13 +4,13 @@ import { ResponseMiddlewareModule } from 'src/common/response/middleware/respons
 import { ResponseCustomHeadersInterceptor } from './interceptors/response.custom-headers.interceptor';
 
 @Module({
-    controllers: [],
-    providers: [
-        {
-            provide: APP_INTERCEPTOR,
-            useClass: ResponseCustomHeadersInterceptor,
-        },
-    ],
-    imports: [ResponseMiddlewareModule],
+  controllers: [],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ResponseCustomHeadersInterceptor,
+    },
+  ],
+  imports: [ResponseMiddlewareModule],
 })
 export class ResponseModule {}

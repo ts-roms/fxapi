@@ -8,49 +8,49 @@ export const PermissionDatabaseName = 'permissions';
 
 @DatabaseEntity({ collection: PermissionDatabaseName })
 export class PermissionEntity extends DatabaseMongoUUIDEntityAbstract {
-    @Prop({
-        required: true,
-        index: true,
-        unique: true,
-        uppercase: true,
-        trim: true,
-        maxlength: 25,
-        type: String,
-    })
-    code: string;
+  @Prop({
+    required: true,
+    index: true,
+    unique: true,
+    uppercase: true,
+    trim: true,
+    maxlength: 25,
+    type: String,
+  })
+  code: string;
 
-    @Prop({
-        required: true,
-        index: true,
-        trim: true,
-        enum: ENUM_PERMISSION_GROUP,
-        type: String,
-    })
-    group: ENUM_PERMISSION_GROUP;
+  @Prop({
+    required: true,
+    index: true,
+    trim: true,
+    enum: ENUM_PERMISSION_GROUP,
+    type: String,
+  })
+  group: ENUM_PERMISSION_GROUP;
 
-    @Prop({
-        required: true,
-        type: String,
-        maxlength: 255,
-    })
-    description: string;
+  @Prop({
+    required: true,
+    type: String,
+    maxlength: 255,
+  })
+  description: string;
 
-    @Prop({
-        required: true,
-        default: true,
-        index: true,
-        type: Boolean,
-    })
-    isActive: boolean;
+  @Prop({
+    required: true,
+    default: true,
+    index: true,
+    type: Boolean,
+  })
+  isActive: boolean;
 }
 
 export const PermissionSchema = SchemaFactory.createForClass(PermissionEntity);
 
 PermissionSchema.pre(
-    'save',
-    function (next: CallbackWithoutResultAndOptionalError) {
-        this.code = this.code.toUpperCase();
+  'save',
+  function (next: CallbackWithoutResultAndOptionalError) {
+    this.code = this.code.toUpperCase();
 
-        next();
-    }
+    next();
+  }
 );

@@ -1,9 +1,9 @@
 import {
-    BadRequestException,
-    Body,
-    Controller,
-    InternalServerErrorException,
-    Put,
+  BadRequestException,
+  Body,
+  Controller,
+  InternalServerErrorException,
+  Put,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ENUM_AUTH_PERMISSIONS } from 'src/common/auth/constants/auth.enum.permission.constant';
@@ -25,53 +25,50 @@ import { SettingService } from 'src/common/setting/services/setting.service';
 
 @ApiTags('admin.setting')
 @Controller({
-    version: '1',
-    path: '/setting',
+  version: '1',
+  path: '/setting',
 })
 export class SettingAdminController {
-    constructor(private readonly settingService: SettingService) {}
+  constructor(private readonly settingService: SettingService) {}
 
-    @SettingUpdateDoc()
-    @Response('setting.update', {
-        serialization: ResponseIdSerialization,
-    })
-    @SettingUpdateGuard()
-    @RequestParamGuard(SettingRequestDto)
-    @AuthPermissionProtected(
-        ENUM_AUTH_PERMISSIONS.SETTING_READ,
-        ENUM_AUTH_PERMISSIONS.SETTING_UPDATE
-    )
-    @AuthJwtAdminAccessProtected()
-    @Put('/update/:setting')
-    async update(
-        @GetSetting() setting: SettingEntity,
-        @Body()
-        body: SettingUpdateValueDto
-    ): Promise<IResponse> {
-        const check = await this.settingService.checkValue(
-            body.value,
-            body.type
-        );
-        if (!check) {
-            throw new BadRequestException({
-                statusCode:
-                    ENUM_SETTING_STATUS_CODE_ERROR.SETTING_VALUE_NOT_ALLOWED_ERROR,
-                message: 'setting.error.valueNotAllowed',
-            });
-        }
-
-        try {
-            await this.settingService.updateValue(setting._id, body);
-        } catch (err: any) {
-            throw new InternalServerErrorException({
-                statusCode: ENUM_ERROR_STATUS_CODE_ERROR.ERROR_UNKNOWN,
-                message: 'http.serverError.internalServerError',
-                _error: err.message,
-            });
-        }
-
-        return {
-            _id: setting._id,
-        };
+  @SettingUpdateDoc()
+  @Response('setting.update', {
+    serialization: ResponseIdSerialization,
+  })
+  @SettingUpdateGuard()
+  @RequestParamGuard(SettingRequestDto)
+  @AuthPermissionProtected(
+    ENUM_AUTH_PERMISSIONS.SETTING_READ,
+    ENUM_AUTH_PERMISSIONS.SETTING_UPDATE
+  )
+  @AuthJwtAdminAccessProtected()
+  @Put('/update/:setting')
+  async update(
+    @GetSetting() setting: SettingEntity,
+    @Body()
+    body: SettingUpdateValueDto
+  ): Promise<IResponse> {
+    const check = await this.settingService.checkValue(body.value, body.type);
+    if (!check) {
+      throw new BadRequestException({
+        statusCode:
+          ENUM_SETTING_STATUS_CODE_ERROR.SETTING_VALUE_NOT_ALLOWED_ERROR,
+        message: 'setting.error.valueNotAllowed',
+      });
     }
+
+    try {
+      await this.settingService.updateValue(setting._id, body);
+    } catch (err: any) {
+      throw new InternalServerErrorException({
+        statusCode: ENUM_ERROR_STATUS_CODE_ERROR.ERROR_UNKNOWN,
+        message: 'http.serverError.internalServerError',
+        _error: err.message,
+      });
+    }
+
+    return {
+      _id: setting._id,
+    };
+  }
 }

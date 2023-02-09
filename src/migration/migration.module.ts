@@ -13,22 +13,22 @@ import { RoleModule } from 'src/modules/role/role.module';
 import { UserModule } from 'src/modules/user/user.module';
 
 @Module({
-    imports: [
-        CommonModule,
-        CommandModule,
-        ApiKeyModule,
-        PermissionModule,
-        UserModule,
-        RoleModule,
-        AuthModule,
-    ],
-    providers: [
-        MigrationApiKeySeed,
-        MigrationSettingSeed,
-        MigrationPermissionSeed,
-        MigrationRoleSeed,
-        MigrationUserSeed,
-    ],
-    exports: [],
+  imports: [
+    CommonModule,
+    CommandModule,
+    ApiKeyModule,
+    PermissionModule,
+    UserModule,
+    RoleModule,
+    AuthModule,
+  ],
+  providers: [
+    MigrationApiKeySeed,
+    MigrationSettingSeed,
+    MigrationPermissionSeed,
+    MigrationRoleSeed,
+    MigrationUserSeed,
+  ],
+  exports: [],
 })
 export class MigrationModule {}

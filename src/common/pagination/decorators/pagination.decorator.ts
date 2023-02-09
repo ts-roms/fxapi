@@ -1,8 +1,8 @@
 import { Query } from '@nestjs/common';
 import {
-    IPaginationFilterDateOptions,
-    IPaginationFilterStringContainOptions,
-    IPaginationFilterStringEqualOptions,
+  IPaginationFilterDateOptions,
+  IPaginationFilterStringContainOptions,
+  IPaginationFilterStringEqualOptions,
 } from 'src/common/pagination/interfaces/pagination.interface';
 import { PaginationFilterContainPipe } from 'src/common/pagination/pipes/pagination.filter-contain.pipe';
 import { PaginationFilterDatePipe } from 'src/common/pagination/pipes/pagination.filter-date.pipe';
@@ -14,53 +14,50 @@ import { PaginationSearchPipe } from 'src/common/pagination/pipes/pagination.sea
 import { PaginationSortPipe } from 'src/common/pagination/pipes/pagination.sort.pipe';
 
 export function PaginationQuery(
-    defaultPerPage: number,
-    _availableSearch: string[],
-    defaultSort: string,
-    _availableSort: string[]
+  defaultPerPage: number,
+  _availableSearch: string[],
+  defaultSort: string,
+  _availableSort: string[]
 ): ParameterDecorator {
-    return Query(
-        PaginationSearchPipe(_availableSearch),
-        PaginationSortPipe(defaultSort, _availableSort),
-        PaginationPagingPipe(defaultPerPage)
-    );
+  return Query(
+    PaginationSearchPipe(_availableSearch),
+    PaginationSortPipe(defaultSort, _availableSort),
+    PaginationPagingPipe(defaultPerPage)
+  );
 }
 
 export function PaginationQueryFilterInBoolean(
-    field: string,
-    defaultValue: boolean[]
+  field: string,
+  defaultValue: boolean[]
 ): ParameterDecorator {
-    return Query(field, PaginationFilterInBooleanPipe(defaultValue));
+  return Query(field, PaginationFilterInBooleanPipe(defaultValue));
 }
 
 export function PaginationQueryFilterInEnum<T>(
-    field: string,
-    defaultValue: T,
-    defaultEnum: Record<string, any>
+  field: string,
+  defaultValue: T,
+  defaultEnum: Record<string, any>
 ): ParameterDecorator {
-    return Query(
-        field,
-        PaginationFilterInEnumPipe<T>(defaultValue, defaultEnum)
-    );
+  return Query(field, PaginationFilterInEnumPipe<T>(defaultValue, defaultEnum));
 }
 
 export function PaginationQueryFilterEqual(
-    field: string,
-    options?: IPaginationFilterStringEqualOptions
+  field: string,
+  options?: IPaginationFilterStringEqualOptions
 ): ParameterDecorator {
-    return Query(field, PaginationFilterEqualPipe(options));
+  return Query(field, PaginationFilterEqualPipe(options));
 }
 
 export function PaginationQueryFilterContain(
-    field: string,
-    options?: IPaginationFilterStringContainOptions
+  field: string,
+  options?: IPaginationFilterStringContainOptions
 ): ParameterDecorator {
-    return Query(field, PaginationFilterContainPipe(options));
+  return Query(field, PaginationFilterContainPipe(options));
 }
 
 export function PaginationQueryFilterDate(
-    field: string,
-    options?: IPaginationFilterDateOptions
+  field: string,
+  options?: IPaginationFilterDateOptions
 ): ParameterDecorator {
-    return Query(field, PaginationFilterDatePipe(options));
+  return Query(field, PaginationFilterDatePipe(options));
 }

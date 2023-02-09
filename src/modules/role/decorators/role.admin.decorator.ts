@@ -6,43 +6,43 @@ import { RolePutToRequestGuard } from 'src/modules/role/guards/role.put-to-reque
 import { RoleUsedGuard } from 'src/modules/role/guards/role.used.guard';
 
 export function RoleGetGuard(): MethodDecorator {
-    return applyDecorators(UseGuards(RolePutToRequestGuard, RoleNotFoundGuard));
+  return applyDecorators(UseGuards(RolePutToRequestGuard, RoleNotFoundGuard));
 }
 
 export function RoleUpdateGuard(): MethodDecorator {
-    return applyDecorators(
-        UseGuards(
-            RolePutToRequestGuard,
-            RoleNotFoundGuard,
-            RoleActiveGuard,
-            RoleUsedGuard
-        ),
-        SetMetadata(ROLE_ACTIVE_META_KEY, [true])
-    );
+  return applyDecorators(
+    UseGuards(
+      RolePutToRequestGuard,
+      RoleNotFoundGuard,
+      RoleActiveGuard,
+      RoleUsedGuard
+    ),
+    SetMetadata(ROLE_ACTIVE_META_KEY, [true])
+  );
 }
 
 export function RoleDeleteGuard(): MethodDecorator {
-    return applyDecorators(
-        UseGuards(
-            RolePutToRequestGuard,
-            RoleNotFoundGuard,
-            RoleActiveGuard,
-            RoleUsedGuard
-        ),
-        SetMetadata(ROLE_ACTIVE_META_KEY, [true])
-    );
+  return applyDecorators(
+    UseGuards(
+      RolePutToRequestGuard,
+      RoleNotFoundGuard,
+      RoleActiveGuard,
+      RoleUsedGuard
+    ),
+    SetMetadata(ROLE_ACTIVE_META_KEY, [true])
+  );
 }
 
 export function RoleUpdateActiveGuard(): MethodDecorator {
-    return applyDecorators(
-        UseGuards(RolePutToRequestGuard, RoleNotFoundGuard, RoleActiveGuard),
-        SetMetadata(ROLE_ACTIVE_META_KEY, [false])
-    );
+  return applyDecorators(
+    UseGuards(RolePutToRequestGuard, RoleNotFoundGuard, RoleActiveGuard),
+    SetMetadata(ROLE_ACTIVE_META_KEY, [false])
+  );
 }
 
 export function RoleUpdateInactiveGuard(): MethodDecorator {
-    return applyDecorators(
-        UseGuards(RolePutToRequestGuard, RoleNotFoundGuard, RoleActiveGuard),
-        SetMetadata(ROLE_ACTIVE_META_KEY, [true])
-    );
+  return applyDecorators(
+    UseGuards(RolePutToRequestGuard, RoleNotFoundGuard, RoleActiveGuard),
+    SetMetadata(ROLE_ACTIVE_META_KEY, [true])
+  );
 }

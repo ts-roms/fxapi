@@ -5,16 +5,16 @@ import { RouterModule } from 'src/router/router.module';
 import { CommonModule } from 'src/common/common.module';
 
 @Module({
-    controllers: [AppController],
-    providers: [],
-    imports: [
-        CommonModule,
+  controllers: [AppController],
+  providers: [],
+  imports: [
+    CommonModule,
 
-        // Jobs
-        JobsModule.forRoot(),
+    // Jobs
+    JobsModule.forRoot(),
 
-        // Routes
-        RouterModule.forRoot(),
-    ],
+    // Routes
+    RouterModule.forRoot(),
+  ],
 })
 export class AppModule {}

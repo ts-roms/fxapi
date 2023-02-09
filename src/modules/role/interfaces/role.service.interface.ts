@@ -1,12 +1,12 @@
 import {
-    IDatabaseCreateOptions,
-    IDatabaseSoftDeleteOptions,
-    IDatabaseExistOptions,
-    IDatabaseFindAllOptions,
-    IDatabaseFindOneOptions,
-    IDatabaseOptions,
-    IDatabaseManyOptions,
-    IDatabaseCreateManyOptions,
+  IDatabaseCreateOptions,
+  IDatabaseSoftDeleteOptions,
+  IDatabaseExistOptions,
+  IDatabaseFindAllOptions,
+  IDatabaseFindOneOptions,
+  IDatabaseOptions,
+  IDatabaseManyOptions,
+  IDatabaseCreateManyOptions,
 } from 'src/common/database/interfaces/database.interface';
 import { ENUM_PERMISSION_GROUP } from 'src/modules/permission/constants/permission.enum.constant';
 import { PermissionEntity } from 'src/modules/permission/repository/entities/permission.entity';
@@ -17,73 +17,70 @@ import { IRoleEntity } from 'src/modules/role/interfaces/role.interface';
 import { RoleEntity } from 'src/modules/role/repository/entities/role.entity';
 
 export interface IRoleService {
-    findAll<T>(
-        find?: Record<string, any>,
-        options?: IDatabaseFindAllOptions
-    ): Promise<T[]>;
+  findAll<T>(
+    find?: Record<string, any>,
+    options?: IDatabaseFindAllOptions
+  ): Promise<T[]>;
 
-    findOneById<T>(_id: string, options?: IDatabaseFindOneOptions): Promise<T>;
+  findOneById<T>(_id: string, options?: IDatabaseFindOneOptions): Promise<T>;
 
-    findOne<T>(
-        find: Record<string, any>,
-        options?: IDatabaseFindOneOptions
-    ): Promise<T>;
+  findOne<T>(
+    find: Record<string, any>,
+    options?: IDatabaseFindOneOptions
+  ): Promise<T>;
 
-    getTotal(
-        find?: Record<string, any>,
-        options?: IDatabaseOptions
-    ): Promise<number>;
+  getTotal(
+    find?: Record<string, any>,
+    options?: IDatabaseOptions
+  ): Promise<number>;
 
-    existByName(
-        name: string,
-        options?: IDatabaseExistOptions
-    ): Promise<boolean>;
+  existByName(name: string, options?: IDatabaseExistOptions): Promise<boolean>;
 
-    create(
-        data: RoleCreateDto,
-        options?: IDatabaseCreateOptions
-    ): Promise<RoleEntity>;
+  create(
+    data: RoleCreateDto,
+    options?: IDatabaseCreateOptions
+  ): Promise<RoleEntity>;
 
-    createSuperAdmin(options?: IDatabaseCreateOptions): Promise<RoleEntity>;
+  createSuperAdmin(options?: IDatabaseCreateOptions): Promise<RoleEntity>;
 
-    updateName(
-        _id: string,
-        data: RoleUpdateNameDto,
-        options?: IDatabaseOptions
-    ): Promise<RoleEntity>;
+  updateName(
+    _id: string,
+    data: RoleUpdateNameDto,
+    options?: IDatabaseOptions
+  ): Promise<RoleEntity>;
 
-    updatePermission(
-        _id: string,
-        data: RoleUpdatePermissionDto,
-        options?: IDatabaseOptions
-    ): Promise<RoleEntity>;
+  updatePermission(
+    _id: string,
+    data: RoleUpdatePermissionDto,
+    options?: IDatabaseOptions
+  ): Promise<RoleEntity>;
 
-    active(_id: string, options?: IDatabaseOptions): Promise<RoleEntity>;
+  active(_id: string, options?: IDatabaseOptions): Promise<RoleEntity>;
 
-    inactive(_id: string, options?: IDatabaseOptions): Promise<RoleEntity>;
+  inactive(_id: string, options?: IDatabaseOptions): Promise<RoleEntity>;
 
-    deleteOneById(
-        _id: string,
-        options?: IDatabaseSoftDeleteOptions
-    ): Promise<RoleEntity>;
+  deleteOneById(
+    _id: string,
+    options?: IDatabaseSoftDeleteOptions
+  ): Promise<RoleEntity>;
 
-    deleteOne(
-        find: Record<string, any>,
-        options?: IDatabaseSoftDeleteOptions
-    ): Promise<RoleEntity>;
+  deleteOne(
+    find: Record<string, any>,
+    options?: IDatabaseSoftDeleteOptions
+  ): Promise<RoleEntity>;
 
-    deleteMany(
-        find: Record<string, any>,
-        options?: IDatabaseManyOptions
-    ): Promise<boolean>;
+  deleteMany(
+    find: Record<string, any>,
+    options?: IDatabaseManyOptions
+  ): Promise<boolean>;
 
-    createMany(
-        data: RoleCreateDto[],
-        options?: IDatabaseCreateManyOptions
-    ): Promise<boolean>;
+  createMany(
+    data: RoleCreateDto[],
+    options?: IDatabaseCreateManyOptions
+  ): Promise<boolean>;
 
-    getPermissionByGroup(
-        role: IRoleEntity,
-        scope: ENUM_PERMISSION_GROUP[]
-    ): Promise<PermissionEntity[]>;
+  getPermissionByGroup(
+    role: IRoleEntity,
+    scope: ENUM_PERMISSION_GROUP[]
+  ): Promise<PermissionEntity[]>;
 }
