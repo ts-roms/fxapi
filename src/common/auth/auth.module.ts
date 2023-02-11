@@ -4,9 +4,9 @@ import { AuthJwtRefreshStrategy } from 'src/common/auth/guards/jwt-refresh/auth.
 import { AuthService } from 'src/common/auth/services/auth.service';
 
 @Module({
-    providers: [AuthService, AuthJwtAccessStrategy, AuthJwtRefreshStrategy],
-    exports: [AuthService],
-    controllers: [],
-    imports: [],
+  providers: [AuthService, AuthJwtAccessStrategy, AuthJwtRefreshStrategy],
+  exports: [AuthService],
+  controllers: [],
+  imports: [],
 })
 export class AuthModule {}

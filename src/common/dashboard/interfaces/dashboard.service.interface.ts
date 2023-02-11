@@ -1,24 +1,24 @@
 import { DashboardDto } from 'src/common/dashboard/dtos/dashboard';
 import {
-    IDashboardStartAndEnd,
-    IDashboardStartAndEndDate,
-    IDashboardStartAndEndYear,
+  IDashboardStartAndEnd,
+  IDashboardStartAndEndDate,
+  IDashboardStartAndEndYear,
 } from 'src/common/dashboard/interfaces/dashboard.interface';
 
 export interface IDashboardService {
-    getStartAndEndDate(date: DashboardDto): Promise<IDashboardStartAndEndDate>;
+  getStartAndEndDate(date: DashboardDto): Promise<IDashboardStartAndEndDate>;
 
-    getMonths(): Promise<number[]>;
+  getMonths(): Promise<number[]>;
 
-    getStartAndEndYear({
-        startDate,
-        endDate,
-    }: IDashboardStartAndEndDate): Promise<IDashboardStartAndEndYear>;
+  getStartAndEndYear({
+    startDate,
+    endDate,
+  }: IDashboardStartAndEndDate): Promise<IDashboardStartAndEndYear>;
 
-    getStartAndEndMonth({
-        month,
-        year,
-    }: IDashboardStartAndEnd): Promise<IDashboardStartAndEndDate>;
+  getStartAndEndMonth({
+    month,
+    year,
+  }: IDashboardStartAndEnd): Promise<IDashboardStartAndEndDate>;
 
-    getPercentage(value: number, total: number): Promise<number>;
+  getPercentage(value: number, total: number): Promise<number>;
 }

@@ -8,54 +8,54 @@ import { RoleCreateDto } from 'src/modules/role/dtos/role.create.dto';
 
 @Injectable()
 export class MigrationRoleSeed {
-    constructor(
-        private readonly permissionService: PermissionService,
-        private readonly roleService: RoleService
-    ) {}
+  constructor(
+    private readonly permissionService: PermissionService,
+    private readonly roleService: RoleService
+  ) {}
 
-    @Command({
-        command: 'seed:role',
-        describe: 'seed roles',
-    })
-    async seeds(): Promise<void> {
-        const permissions: PermissionEntity[] =
-            await this.permissionService.findAll();
-        const permissionsMap = permissions.map((val) => val._id);
+  @Command({
+    command: 'seed:role',
+    describe: 'seed roles',
+  })
+  async seeds(): Promise<void> {
+    const permissions: PermissionEntity[] =
+      await this.permissionService.findAll();
+    const permissionsMap = permissions.map((val) => val._id);
 
-        const dataAdmin: RoleCreateDto[] = [
-            {
-                name: 'admin',
-                permissions: permissionsMap,
-                accessFor: ENUM_AUTH_ACCESS_FOR.ADMIN,
-            },
-            {
-                name: 'user',
-                permissions: [],
-                accessFor: ENUM_AUTH_ACCESS_FOR.USER,
-            },
-        ];
+    const dataAdmin: RoleCreateDto[] = [
+      {
+        name: 'admin',
+        permissions: permissionsMap,
+        accessFor: ENUM_AUTH_ACCESS_FOR.ADMIN,
+      },
+      {
+        name: 'user',
+        permissions: [],
+        accessFor: ENUM_AUTH_ACCESS_FOR.USER,
+      },
+    ];
 
-        try {
-            await this.roleService.createMany(dataAdmin);
-            await this.roleService.createSuperAdmin();
-        } catch (err: any) {
-            throw new Error(err.message);
-        }
-
-        return;
+    try {
+      await this.roleService.createMany(dataAdmin);
+      await this.roleService.createSuperAdmin();
+    } catch (err: any) {
+      throw new Error(err.message);
     }
 
-    @Command({
-        command: 'remove:role',
-        describe: 'remove roles',
-    })
-    async remove(): Promise<void> {
-        try {
-            await this.roleService.deleteMany({});
-        } catch (err: any) {
-            throw new Error(err.message);
-        }
+    return;
+  }
 
-        return;
+  @Command({
+    command: 'remove:role',
+    describe: 'remove roles',
+  })
+  async remove(): Promise<void> {
+    try {
+      await this.roleService.deleteMany({});
+    } catch (err: any) {
+      throw new Error(err.message);
     }
+
+    return;
+  }
 }

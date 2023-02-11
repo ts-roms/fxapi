@@ -4,9 +4,9 @@ import { RoleEnumService } from 'src/modules/role/services/role.enum.service';
 import { RoleService } from './services/role.service';
 
 @Module({
-    controllers: [],
-    providers: [RoleService, RoleEnumService],
-    exports: [RoleService, RoleEnumService],
-    imports: [RoleRepositoryModule],
+  controllers: [],
+  providers: [RoleService, RoleEnumService],
+  exports: [RoleService, RoleEnumService],
+  imports: [RoleRepositoryModule],
 })
 export class RoleModule {}

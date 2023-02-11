@@ -23,232 +23,222 @@ import { DatabaseDefaultUUID } from 'src/common/database/constants/database.func
 import { ENUM_PERMISSION_GROUP } from 'src/modules/permission/constants/permission.enum.constant';
 
 describe('E2E User Grant Password', () => {
-    let app: INestApplication;
-    let userService: UserService;
-    let authService: AuthService;
-    let roleService: RoleService;
+  let app: INestApplication;
+  let userService: UserService;
+  let authService: AuthService;
+  let roleService: RoleService;
 
-    const password = `aaAA@!123`;
+  const password = `aaAA@!123`;
 
-    let user: UserEntity;
+  let user: UserEntity;
 
-    let accessToken: string;
-    let accessTokenNotFound: string;
+  let accessToken: string;
+  let accessTokenNotFound: string;
 
-    beforeAll(async () => {
-        process.env.AUTH_JWT_PAYLOAD_ENCRYPT = 'false';
+  beforeAll(async () => {
+    process.env.AUTH_JWT_PAYLOAD_ENCRYPT = 'false';
 
-        const modRef = await Test.createTestingModule({
-            imports: [
-                CommonModule,
-                RoleModule,
-                PermissionModule,
-                RoutesModule,
-                RouterModule.register([
-                    {
-                        path: '/',
-                        module: RoutesModule,
-                    },
-                ]),
-            ],
-        }).compile();
+    const modRef = await Test.createTestingModule({
+      imports: [
+        CommonModule,
+        RoleModule,
+        PermissionModule,
+        RoutesModule,
+        RouterModule.register([
+          {
+            path: '/',
+            module: RoutesModule,
+          },
+        ]),
+      ],
+    }).compile();
 
-        app = modRef.createNestApplication();
-        useContainer(app.select(CommonModule), { fallbackOnErrors: true });
-        userService = app.get(UserService);
-        authService = app.get(AuthService);
-        roleService = app.get(RoleService);
+    app = modRef.createNestApplication();
+    useContainer(app.select(CommonModule), { fallbackOnErrors: true });
+    userService = app.get(UserService);
+    authService = app.get(AuthService);
+    roleService = app.get(RoleService);
 
-        const role: RoleEntity = await roleService.findOne({
-            name: 'user',
-        });
-
-        const passwordHash = await authService.createPassword(password);
-
-        user = await userService.create(
-            {
-                username: faker.internet.userName(),
-                firstName: faker.name.firstName(),
-                lastName: faker.name.lastName(),
-                password,
-                email: faker.internet.email(),
-                mobileNumber: faker.phone.number('62812#########'),
-                role: `${role._id}`,
-            },
-            passwordHash
-        );
-
-        const userPopulate = await userService.findOneById<IUserEntity>(
-            user._id,
-            {
-                join: true,
-            }
-        );
-
-        const map = plainToInstance(UserPayloadSerialization, userPopulate);
-        const payload = await authService.createPayloadAccessToken(map, false);
-        const payloadNotFound = {
-            ...payload,
-            _id: `${DatabaseDefaultUUID()}`,
-        };
-
-        accessToken = await authService.createAccessToken(payload);
-        accessTokenNotFound = await authService.createAccessToken(
-            payloadNotFound
-        );
-
-        await app.init();
+    const role: RoleEntity = await roleService.findOne({
+      name: 'user',
     });
 
-    afterAll(async () => {
-        jest.clearAllMocks();
+    const passwordHash = await authService.createPassword(password);
 
-        try {
-            await userService.deleteMany({ _id: user._id });
-        } catch (err: any) {
-            console.error(err);
-        }
+    user = await userService.create(
+      {
+        username: faker.internet.userName(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        password,
+        email: faker.internet.email(),
+        mobileNumber: faker.phone.number('62812#########'),
+        role: `${role._id}`,
+      },
+      passwordHash
+    );
 
-        await app.close();
+    const userPopulate = await userService.findOneById<IUserEntity>(user._id, {
+      join: true,
     });
 
-    it(`POST ${E2E_USER_GRANT_PERMISSION} Error Request`, async () => {
-        const response = await request(app.getHttpServer())
-            .post(E2E_USER_GRANT_PERMISSION)
-            .send({
-                scope: '123123',
-            })
-            .set('Authorization', `Bearer ${accessToken}`);
+    const map = plainToInstance(UserPayloadSerialization, userPopulate);
+    const payload = await authService.createPayloadAccessToken(map, false);
+    const payloadNotFound = {
+      ...payload,
+      _id: `${DatabaseDefaultUUID()}`,
+    };
 
-        expect(response.status).toEqual(HttpStatus.UNPROCESSABLE_ENTITY);
-        expect(response.body.statusCode).toEqual(
-            ENUM_REQUEST_STATUS_CODE_ERROR.REQUEST_VALIDATION_ERROR
-        );
-    });
+    accessToken = await authService.createAccessToken(payload);
+    accessTokenNotFound = await authService.createAccessToken(payloadNotFound);
 
-    it(`POST ${E2E_USER_GRANT_PERMISSION} Not Found`, async () => {
-        const response = await request(app.getHttpServer())
-            .post(E2E_USER_GRANT_PERMISSION)
-            .send({
-                scope: [ENUM_PERMISSION_GROUP.PERMISSION],
-            })
-            .set('Authorization', `Bearer ${accessTokenNotFound}`);
+    await app.init();
+  });
 
-        expect(response.status).toEqual(HttpStatus.NOT_FOUND);
-        expect(response.body.statusCode).toEqual(
-            ENUM_USER_STATUS_CODE_ERROR.USER_NOT_FOUND_ERROR
-        );
-    });
+  afterAll(async () => {
+    jest.clearAllMocks();
 
-    it(`POST ${E2E_USER_GRANT_PERMISSION} Success`, async () => {
-        const response = await request(app.getHttpServer())
-            .post(E2E_USER_GRANT_PERMISSION)
-            .send({
-                scope: [ENUM_PERMISSION_GROUP.PERMISSION],
-            })
-            .set('Authorization', `Bearer ${accessToken}`);
+    try {
+      await userService.deleteMany({ _id: user._id });
+    } catch (err: any) {
+      console.error(err);
+    }
 
-        expect(response.status).toEqual(HttpStatus.OK);
-        expect(response.body.statusCode).toEqual(HttpStatus.OK);
-    });
+    await app.close();
+  });
+
+  it(`POST ${E2E_USER_GRANT_PERMISSION} Error Request`, async () => {
+    const response = await request(app.getHttpServer())
+      .post(E2E_USER_GRANT_PERMISSION)
+      .send({
+        scope: '123123',
+      })
+      .set('Authorization', `Bearer ${accessToken}`);
+
+    expect(response.status).toEqual(HttpStatus.UNPROCESSABLE_ENTITY);
+    expect(response.body.statusCode).toEqual(
+      ENUM_REQUEST_STATUS_CODE_ERROR.REQUEST_VALIDATION_ERROR
+    );
+  });
+
+  it(`POST ${E2E_USER_GRANT_PERMISSION} Not Found`, async () => {
+    const response = await request(app.getHttpServer())
+      .post(E2E_USER_GRANT_PERMISSION)
+      .send({
+        scope: [ENUM_PERMISSION_GROUP.PERMISSION],
+      })
+      .set('Authorization', `Bearer ${accessTokenNotFound}`);
+
+    expect(response.status).toEqual(HttpStatus.NOT_FOUND);
+    expect(response.body.statusCode).toEqual(
+      ENUM_USER_STATUS_CODE_ERROR.USER_NOT_FOUND_ERROR
+    );
+  });
+
+  it(`POST ${E2E_USER_GRANT_PERMISSION} Success`, async () => {
+    const response = await request(app.getHttpServer())
+      .post(E2E_USER_GRANT_PERMISSION)
+      .send({
+        scope: [ENUM_PERMISSION_GROUP.PERMISSION],
+      })
+      .set('Authorization', `Bearer ${accessToken}`);
+
+    expect(response.status).toEqual(HttpStatus.OK);
+    expect(response.body.statusCode).toEqual(HttpStatus.OK);
+  });
 });
 
 describe('E2E User Grant Password Payload Encryption', () => {
-    let app: INestApplication;
-    let userService: UserService;
-    let authService: AuthService;
-    let roleService: RoleService;
+  let app: INestApplication;
+  let userService: UserService;
+  let authService: AuthService;
+  let roleService: RoleService;
 
-    const password = `aaAA@!123`;
+  const password = `aaAA@!123`;
 
-    let user: UserEntity;
+  let user: UserEntity;
 
-    let accessToken: string;
+  let accessToken: string;
 
-    beforeAll(async () => {
-        process.env.AUTH_JWT_PAYLOAD_ENCRYPT = 'true';
+  beforeAll(async () => {
+    process.env.AUTH_JWT_PAYLOAD_ENCRYPT = 'true';
 
-        const modRef = await Test.createTestingModule({
-            imports: [
-                CommonModule,
-                RoleModule,
-                PermissionModule,
-                RoutesModule,
-                RouterModule.register([
-                    {
-                        path: '/',
-                        module: RoutesModule,
-                    },
-                ]),
-            ],
-        }).compile();
+    const modRef = await Test.createTestingModule({
+      imports: [
+        CommonModule,
+        RoleModule,
+        PermissionModule,
+        RoutesModule,
+        RouterModule.register([
+          {
+            path: '/',
+            module: RoutesModule,
+          },
+        ]),
+      ],
+    }).compile();
 
-        app = modRef.createNestApplication();
-        useContainer(app.select(CommonModule), { fallbackOnErrors: true });
-        userService = app.get(UserService);
-        authService = app.get(AuthService);
-        roleService = app.get(RoleService);
+    app = modRef.createNestApplication();
+    useContainer(app.select(CommonModule), { fallbackOnErrors: true });
+    userService = app.get(UserService);
+    authService = app.get(AuthService);
+    roleService = app.get(RoleService);
 
-        const role: RoleEntity = await roleService.findOne({
-            name: 'user',
-        });
-
-        const passwordHash = await authService.createPassword(password);
-
-        user = await userService.create(
-            {
-                username: faker.internet.userName(),
-                firstName: faker.name.firstName(),
-                lastName: faker.name.lastName(),
-                password,
-                email: faker.internet.email(),
-                mobileNumber: faker.phone.number('62812#########'),
-                role: `${role._id}`,
-            },
-            passwordHash
-        );
-
-        const userPopulate = await userService.findOneById<IUserEntity>(
-            user._id,
-            {
-                join: true,
-            }
-        );
-
-        const map = plainToInstance(UserPayloadSerialization, userPopulate);
-        const payload = await authService.createPayloadAccessToken(map, false);
-        const payloadHashedAccessToken = await authService.encryptAccessToken(
-            payload
-        );
-
-        accessToken = await authService.createAccessToken(
-            payloadHashedAccessToken
-        );
-
-        await app.init();
+    const role: RoleEntity = await roleService.findOne({
+      name: 'user',
     });
 
-    afterAll(async () => {
-        jest.clearAllMocks();
+    const passwordHash = await authService.createPassword(password);
 
-        try {
-            await userService.deleteMany({ _id: user._id });
-        } catch (err: any) {
-            console.error(err);
-        }
+    user = await userService.create(
+      {
+        username: faker.internet.userName(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        password,
+        email: faker.internet.email(),
+        mobileNumber: faker.phone.number('62812#########'),
+        role: `${role._id}`,
+      },
+      passwordHash
+    );
 
-        await app.close();
+    const userPopulate = await userService.findOneById<IUserEntity>(user._id, {
+      join: true,
     });
 
-    it(`POST ${E2E_USER_GRANT_PERMISSION} Success`, async () => {
-        const response = await request(app.getHttpServer())
-            .post(E2E_USER_GRANT_PERMISSION)
-            .send({
-                scope: [ENUM_PERMISSION_GROUP.PERMISSION],
-            })
-            .set('Authorization', `Bearer ${accessToken}`);
+    const map = plainToInstance(UserPayloadSerialization, userPopulate);
+    const payload = await authService.createPayloadAccessToken(map, false);
+    const payloadHashedAccessToken = await authService.encryptAccessToken(
+      payload
+    );
 
-        expect(response.status).toEqual(HttpStatus.OK);
-        expect(response.body.statusCode).toEqual(HttpStatus.OK);
-    });
+    accessToken = await authService.createAccessToken(payloadHashedAccessToken);
+
+    await app.init();
+  });
+
+  afterAll(async () => {
+    jest.clearAllMocks();
+
+    try {
+      await userService.deleteMany({ _id: user._id });
+    } catch (err: any) {
+      console.error(err);
+    }
+
+    await app.close();
+  });
+
+  it(`POST ${E2E_USER_GRANT_PERMISSION} Success`, async () => {
+    const response = await request(app.getHttpServer())
+      .post(E2E_USER_GRANT_PERMISSION)
+      .send({
+        scope: [ENUM_PERMISSION_GROUP.PERMISSION],
+      })
+      .set('Authorization', `Bearer ${accessToken}`);
+
+    expect(response.status).toEqual(HttpStatus.OK);
+    expect(response.body.statusCode).toEqual(HttpStatus.OK);
+  });
 });

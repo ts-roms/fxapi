@@ -5,38 +5,38 @@ import { ENUM_SETTING_DATA_TYPE } from 'src/common/setting/constants/setting.enu
 
 @Injectable()
 export class MigrationSettingSeed {
-    constructor(private readonly settingService: SettingService) {}
+  constructor(private readonly settingService: SettingService) {}
 
-    @Command({
-        command: 'seed:setting',
-        describe: 'seeds settings',
-    })
-    async seeds(): Promise<void> {
-        try {
-            await this.settingService.create({
-                name: 'maintenance',
-                description: 'Maintenance Mode',
-                type: ENUM_SETTING_DATA_TYPE.BOOLEAN,
-                value: 'false',
-            });
-        } catch (err: any) {
-            throw new Error(err.message);
-        }
-
-        return;
+  @Command({
+    command: 'seed:setting',
+    describe: 'seeds settings',
+  })
+  async seeds(): Promise<void> {
+    try {
+      await this.settingService.create({
+        name: 'maintenance',
+        description: 'Maintenance Mode',
+        type: ENUM_SETTING_DATA_TYPE.BOOLEAN,
+        value: 'false',
+      });
+    } catch (err: any) {
+      throw new Error(err.message);
     }
 
-    @Command({
-        command: 'remove:setting',
-        describe: 'remove settings',
-    })
-    async remove(): Promise<void> {
-        try {
-            await this.settingService.deleteMany({});
-        } catch (err: any) {
-            throw new Error(err.message);
-        }
+    return;
+  }
 
-        return;
+  @Command({
+    command: 'remove:setting',
+    describe: 'remove settings',
+  })
+  async remove(): Promise<void> {
+    try {
+      await this.settingService.deleteMany({});
+    } catch (err: any) {
+      throw new Error(err.message);
     }
+
+    return;
+  }
 }

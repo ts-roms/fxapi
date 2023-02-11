@@ -6,10 +6,10 @@ import { SettingEntity } from 'src/common/setting/repository/entities/setting.en
 
 @Injectable()
 export class SettingRepository extends DatabaseMongoUUIDRepositoryAbstract<SettingEntity> {
-    constructor(
-        @DatabaseModel(SettingEntity.name)
-        private readonly settingModel: Model<SettingEntity>
-    ) {
-        super(settingModel);
-    }
+  constructor(
+    @DatabaseModel(SettingEntity.name)
+    private readonly settingModel: Model<SettingEntity>
+  ) {
+    super(settingModel);
+  }
 }

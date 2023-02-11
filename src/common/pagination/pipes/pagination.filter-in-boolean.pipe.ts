@@ -4,30 +4,30 @@ import { HelperArrayService } from 'src/common/helper/services/helper.array.serv
 import { PaginationService } from 'src/common/pagination/services/pagination.service';
 
 export function PaginationFilterInBooleanPipe(
-    defaultValue: boolean[]
+  defaultValue: boolean[]
 ): Type<PipeTransform> {
-    @Injectable()
-    class MixinPaginationFilterInBooleanPipe implements PipeTransform {
-        constructor(
-            private readonly paginationService: PaginationService,
-            private readonly helperArrayService: HelperArrayService
-        ) {}
+  @Injectable()
+  class MixinPaginationFilterInBooleanPipe implements PipeTransform {
+    constructor(
+      private readonly paginationService: PaginationService,
+      private readonly helperArrayService: HelperArrayService
+    ) {}
 
-        async transform(
-            value: string,
-            { data: field }: ArgumentMetadata
-        ): Promise<Record<string, { $in: boolean[] }>> {
-            let finalValue: boolean[] = defaultValue as boolean[];
+    async transform(
+      value: string,
+      { data: field }: ArgumentMetadata
+    ): Promise<Record<string, { $in: boolean[] }>> {
+      let finalValue: boolean[] = defaultValue as boolean[];
 
-            if (value) {
-                finalValue = this.helperArrayService.unique(
-                    value.split(',').map((val: string) => val === 'true')
-                );
-            }
+      if (value) {
+        finalValue = this.helperArrayService.unique(
+          value.split(',').map((val: string) => val === 'true')
+        );
+      }
 
-            return this.paginationService.filterIn<boolean>(field, finalValue);
-        }
+      return this.paginationService.filterIn<boolean>(field, finalValue);
     }
+  }
 
-    return mixin(MixinPaginationFilterInBooleanPipe);
+  return mixin(MixinPaginationFilterInBooleanPipe);
 }

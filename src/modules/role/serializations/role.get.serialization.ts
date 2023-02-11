@@ -5,58 +5,58 @@ import { ENUM_AUTH_ACCESS_FOR } from 'src/common/auth/constants/auth.enum.consta
 import { PermissionGetSerialization } from 'src/modules/permission/serializations/permission.get.serialization';
 
 export class RoleGetSerialization {
-    @ApiProperty({
-        description: 'Id that representative with your target data',
-        example: faker.datatype.uuid(),
-        required: true,
-    })
-    @Type(() => String)
-    readonly _id: string;
+  @ApiProperty({
+    description: 'Id that representative with your target data',
+    example: faker.datatype.uuid(),
+    required: true,
+  })
+  @Type(() => String)
+  readonly _id: string;
 
-    @ApiProperty({
-        description: 'Active flag of role',
-        example: true,
-        required: true,
-    })
-    readonly isActive: boolean;
+  @ApiProperty({
+    description: 'Active flag of role',
+    example: true,
+    required: true,
+  })
+  readonly isActive: boolean;
 
-    @ApiProperty({
-        description: 'Alias name of role',
-        example: faker.name.jobTitle(),
-        required: true,
-    })
-    readonly name: string;
+  @ApiProperty({
+    description: 'Alias name of role',
+    example: faker.name.jobTitle(),
+    required: true,
+  })
+  readonly name: string;
 
-    @ApiProperty({
-        description: 'Representative for role',
-        example: 'ADMIN',
-        required: true,
-    })
-    readonly accessFor: ENUM_AUTH_ACCESS_FOR;
+  @ApiProperty({
+    description: 'Representative for role',
+    example: 'ADMIN',
+    required: true,
+  })
+  readonly accessFor: ENUM_AUTH_ACCESS_FOR;
 
-    @ApiProperty({
-        description: 'List of permission',
-        type: () => PermissionGetSerialization,
-        isArray: true,
-        required: true,
-    })
-    @Type(() => PermissionGetSerialization)
-    readonly permissions: PermissionGetSerialization[];
+  @ApiProperty({
+    description: 'List of permission',
+    type: () => PermissionGetSerialization,
+    isArray: true,
+    required: true,
+  })
+  @Type(() => PermissionGetSerialization)
+  readonly permissions: PermissionGetSerialization[];
 
-    @ApiProperty({
-        description: 'Date created at',
-        example: faker.date.recent(),
-        required: true,
-    })
-    readonly createdAt: Date;
+  @ApiProperty({
+    description: 'Date created at',
+    example: faker.date.recent(),
+    required: true,
+  })
+  readonly createdAt: Date;
 
-    @ApiProperty({
-        description: 'Date updated at',
-        example: faker.date.recent(),
-        required: false,
-    })
-    readonly updatedAt: Date;
+  @ApiProperty({
+    description: 'Date updated at',
+    example: faker.date.recent(),
+    required: false,
+  })
+  readonly updatedAt: Date;
 
-    @Exclude()
-    readonly deletedAt?: Date;
+  @Exclude()
+  readonly deletedAt?: Date;
 }

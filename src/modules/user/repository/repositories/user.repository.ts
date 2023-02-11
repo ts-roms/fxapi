@@ -7,14 +7,14 @@ import { UserEntity } from 'src/modules/user/repository/entities/user.entity';
 
 @Injectable()
 export class UserRepository extends DatabaseMongoUUIDRepositoryAbstract<UserEntity> {
-    constructor(
-        @DatabaseModel(UserEntity.name)
-        private readonly userModel: Model<UserEntity>
-    ) {
-        super(userModel, {
-            path: 'role',
-            match: '_id',
-            model: RoleEntity.name,
-        });
-    }
+  constructor(
+    @DatabaseModel(UserEntity.name)
+    private readonly userModel: Model<UserEntity>
+  ) {
+    super(userModel, {
+      path: 'role',
+      match: '_id',
+      model: RoleEntity.name,
+    });
+  }
 }

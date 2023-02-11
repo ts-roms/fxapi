@@ -10,14 +10,14 @@ import DocConfig from './doc.config';
 import DebuggerConfig from './debugger.config';
 
 export default [
-    AppConfig,
-    AuthConfig,
-    DatabaseConfig,
-    HelperConfig,
-    AwsConfig,
-    UserConfig,
-    RequestConfig,
-    FileConfig,
-    DocConfig,
-    DebuggerConfig,
+  AppConfig,
+  AuthConfig,
+  DatabaseConfig,
+  HelperConfig,
+  AwsConfig,
+  UserConfig,
+  RequestConfig,
+  FileConfig,
+  DocConfig,
+  DebuggerConfig,
 ];

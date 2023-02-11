@@ -6,31 +6,31 @@ import { CommonModule } from 'src/common/common.module';
 import { RoutesModule } from 'src/router/routes/routes.module';
 
 describe('Aws S3 Integration', () => {
-    let app: INestApplication;
+  let app: INestApplication;
 
-    beforeAll(async () => {
-        const moduleRef = await Test.createTestingModule({
-            imports: [CommonModule, RoutesModule],
-            controllers: [],
-        }).compile();
+  beforeAll(async () => {
+    const moduleRef = await Test.createTestingModule({
+      imports: [CommonModule, RoutesModule],
+      controllers: [],
+    }).compile();
 
-        app = moduleRef.createNestApplication();
+    app = moduleRef.createNestApplication();
 
-        await app.init();
-    });
+    await app.init();
+  });
 
-    afterAll(async () => {
-        jest.clearAllMocks();
+  afterAll(async () => {
+    jest.clearAllMocks();
 
-        await app.close();
-    });
+    await app.close();
+  });
 
-    it(`GET ${INTEGRATION_AWS_URL} Success`, async () => {
-        const response = await request(app.getHttpServer()).get(
-            INTEGRATION_AWS_URL
-        );
+  it(`GET ${INTEGRATION_AWS_URL} Success`, async () => {
+    const response = await request(app.getHttpServer()).get(
+      INTEGRATION_AWS_URL
+    );
 
-        expect(response.status).toEqual(HttpStatus.OK);
-        expect(response.body.statusCode).toEqual(HttpStatus.OK);
-    });
+    expect(response.status).toEqual(HttpStatus.OK);
+    expect(response.body.statusCode).toEqual(HttpStatus.OK);
+  });
 });

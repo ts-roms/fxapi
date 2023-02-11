@@ -3,6 +3,6 @@ export const E2E_PERMISSION_ADMIN_GROUP_URL = '/admin/permission/group';
 export const E2E_PERMISSION_ADMIN_GET_URL = '/admin/permission/get/:_id';
 export const E2E_PERMISSION_ADMIN_UPDATE_URL = '/admin/permission/update/:_id';
 export const E2E_PERMISSION_ADMIN_ACTIVE_URL =
-    '/admin/permission/update/:_id/active';
+  '/admin/permission/update/:_id/active';
 export const E2E_PERMISSION_ADMIN_INACTIVE_URL =
-    '/admin/permission/update/:_id/inactive';
+  '/admin/permission/update/:_id/inactive';

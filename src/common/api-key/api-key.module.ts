@@ -4,9 +4,9 @@ import { ApiKeyRepositoryModule } from 'src/common/api-key/repository/api-key.re
 import { ApiKeyService } from 'src/common/api-key/services/api-key.service';
 
 @Module({
-    providers: [ApiKeyService, ApiKeyXApiKeyStrategy],
-    exports: [ApiKeyService],
-    controllers: [],
-    imports: [ApiKeyRepositoryModule],
+  providers: [ApiKeyService, ApiKeyXApiKeyStrategy],
+  exports: [ApiKeyService],
+  controllers: [],
+  imports: [ApiKeyRepositoryModule],
 })
 export class ApiKeyModule {}

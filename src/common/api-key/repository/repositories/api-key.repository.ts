@@ -6,10 +6,10 @@ import { DatabaseModel } from 'src/common/database/decorators/database.decorator
 
 @Injectable()
 export class ApiKeyRepository extends DatabaseMongoUUIDRepositoryAbstract<ApiKeyEntity> {
-    constructor(
-        @DatabaseModel(ApiKeyEntity.name)
-        private readonly apiKeyModel: Model<ApiKeyEntity>
-    ) {
-        super(apiKeyModel);
-    }
+  constructor(
+    @DatabaseModel(ApiKeyEntity.name)
+    private readonly apiKeyModel: Model<ApiKeyEntity>
+  ) {
+    super(apiKeyModel);
+  }
 }

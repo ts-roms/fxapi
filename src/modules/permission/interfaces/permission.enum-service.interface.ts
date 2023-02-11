@@ -1,3 +1,3 @@
 export interface IPermissionEnumService {
-    getGroup(): Promise<string[]>;
+  getGroup(): Promise<string[]>;
 }

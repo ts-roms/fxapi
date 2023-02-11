@@ -4,16 +4,16 @@ import { ResponseIdSerialization } from 'src/common/response/serializations/resp
 import { SettingDocParamsGet } from 'src/common/setting/constants/setting.doc.constant';
 
 export function SettingUpdateDoc(): MethodDecorator {
-    return applyDecorators(
-        Doc<ResponseIdSerialization>('setting.update', {
-            auth: {
-                jwtAccessToken: true,
-                permissionToken: true,
-            },
-            request: {
-                params: SettingDocParamsGet,
-            },
-            response: { serialization: ResponseIdSerialization },
-        })
-    );
+  return applyDecorators(
+    Doc<ResponseIdSerialization>('setting.update', {
+      auth: {
+        jwtAccessToken: true,
+        permissionToken: true,
+      },
+      request: {
+        params: SettingDocParamsGet,
+      },
+      response: { serialization: ResponseIdSerialization },
+    })
+  );
 }

@@ -1,11 +1,11 @@
 import { Controller, Get, VERSION_NEUTRAL } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import {
-    DiskHealthIndicator,
-    HealthCheck,
-    HealthCheckService,
-    MemoryHealthIndicator,
-    MongooseHealthIndicator,
+  DiskHealthIndicator,
+  HealthCheck,
+  HealthCheckService,
+  MemoryHealthIndicator,
+  MongooseHealthIndicator,
 } from '@nestjs/terminus';
 import { Connection } from 'mongoose';
 import { DatabaseConnection } from 'src/common/database/decorators/database.decorator';
@@ -17,81 +17,74 @@ import { HealthSerialization } from 'src/health/serializations/health.serializat
 
 @ApiTags('health')
 @Controller({
-    version: VERSION_NEUTRAL,
-    path: '/health',
+  version: VERSION_NEUTRAL,
+  path: '/health',
 })
 export class HealthController {
-    constructor(
-        @DatabaseConnection() private readonly databaseConnection: Connection,
-        private readonly health: HealthCheckService,
-        private readonly memoryHealthIndicator: MemoryHealthIndicator,
-        private readonly diskHealthIndicator: DiskHealthIndicator,
-        private readonly mongooseIndicator: MongooseHealthIndicator,
-        private readonly awsS3Indicator: HealthAwsS3Indicator
-    ) {}
+  constructor(
+    @DatabaseConnection() private readonly databaseConnection: Connection,
+    private readonly health: HealthCheckService,
+    private readonly memoryHealthIndicator: MemoryHealthIndicator,
+    private readonly diskHealthIndicator: DiskHealthIndicator,
+    private readonly mongooseIndicator: MongooseHealthIndicator,
+    private readonly awsS3Indicator: HealthAwsS3Indicator
+  ) {}
 
-    @HealthCheckDoc()
-    @Response('health.check', { serialization: HealthSerialization })
-    @HealthCheck()
-    @Get('/aws')
-    async checkAws(): Promise<IResponse> {
-        return this.health.check([
-            () => this.awsS3Indicator.isHealthy('awsS3Bucket'),
-        ]);
-    }
+  @HealthCheckDoc()
+  @Response('health.check', { serialization: HealthSerialization })
+  @HealthCheck()
+  @Get('/aws')
+  async checkAws(): Promise<IResponse> {
+    return this.health.check([
+      () => this.awsS3Indicator.isHealthy('awsS3Bucket'),
+    ]);
+  }
 
-    @HealthCheckDoc()
-    @Response('health.check', { serialization: HealthSerialization })
-    @HealthCheck()
-    @Get('/database')
-    async checkDatabase(): Promise<IResponse> {
-        return this.health.check([
-            () =>
-                this.mongooseIndicator.pingCheck('database', {
-                    connection: this.databaseConnection,
-                }),
-        ]);
-    }
+  @HealthCheckDoc()
+  @Response('health.check', { serialization: HealthSerialization })
+  @HealthCheck()
+  @Get('/database')
+  async checkDatabase(): Promise<IResponse> {
+    return this.health.check([
+      () =>
+        this.mongooseIndicator.pingCheck('database', {
+          connection: this.databaseConnection,
+        }),
+    ]);
+  }
 
-    @HealthCheckDoc()
-    @Response('health.check', { serialization: HealthSerialization })
-    @HealthCheck()
-    @Get('/memory-heap')
-    async checkMemoryHeap(): Promise<IResponse> {
-        return this.health.check([
-            () =>
-                this.memoryHealthIndicator.checkHeap(
-                    'memoryHeap',
-                    300 * 1024 * 1024
-                ),
-        ]);
-    }
+  @HealthCheckDoc()
+  @Response('health.check', { serialization: HealthSerialization })
+  @HealthCheck()
+  @Get('/memory-heap')
+  async checkMemoryHeap(): Promise<IResponse> {
+    return this.health.check([
+      () =>
+        this.memoryHealthIndicator.checkHeap('memoryHeap', 300 * 1024 * 1024),
+    ]);
+  }
 
-    @HealthCheckDoc()
-    @Response('health.check', { serialization: HealthSerialization })
-    @HealthCheck()
-    @Get('/memory-rss')
-    async checkMemoryRss(): Promise<IResponse> {
-        return this.health.check([
-            () =>
-                this.memoryHealthIndicator.checkRSS(
-                    'memoryRss',
-                    300 * 1024 * 1024
-                ),
-        ]);
-    }
+  @HealthCheckDoc()
+  @Response('health.check', { serialization: HealthSerialization })
+  @HealthCheck()
+  @Get('/memory-rss')
+  async checkMemoryRss(): Promise<IResponse> {
+    return this.health.check([
+      () => this.memoryHealthIndicator.checkRSS('memoryRss', 300 * 1024 * 1024),
+    ]);
+  }
 
-    @HealthCheckDoc()
-    @Response('health.check', { serialization: HealthSerialization })
-    @HealthCheck()
-    @Get('/storage')
-    async checkStorage(): Promise<IResponse> {
-        return this.health.check([
-            () =>
-                this.diskHealthIndicator.checkStorage('diskHealth', {
-                    thresholdPercent: 0.75,
-                    path: '/',
-                }),
-        ]);
-    }
+  @HealthCheckDoc()
+  @Response('health.check', { serialization: HealthSerialization })
+  @HealthCheck()
+  @Get('/storage')
+  async checkStorage(): Promise<IResponse> {
+    return this.health.check([
+      () =>
+        this.diskHealthIndicator.checkStorage('diskHealth', {
+          thresholdPercent: 0.75,
+          path: '/',
+        }),
+    ]);
+  }
 }

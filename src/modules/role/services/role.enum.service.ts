@@ -4,7 +4,7 @@ import { IRoleEnumService } from 'src/modules/role/interfaces/role.enum-service.
 
 @Injectable()
 export class RoleEnumService implements IRoleEnumService {
-    async getAccessFor(): Promise<string[]> {
-        return Object.values(ENUM_AUTH_ACCESS_FOR);
-    }
+  async getAccessFor(): Promise<string[]> {
+    return Object.values(ENUM_AUTH_ACCESS_FOR);
+  }
 }

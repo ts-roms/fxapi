@@ -3,8 +3,8 @@ import { Exclude } from 'class-transformer';
 import { UserGetSerialization } from './user.get.serialization';
 
 export class UserProfileSerialization extends OmitType(UserGetSerialization, [
-    'passwordAttempt',
+  'passwordAttempt',
 ] as const) {
-    @Exclude()
-    passwordAttempt: number;
+  @Exclude()
+  passwordAttempt: number;
 }

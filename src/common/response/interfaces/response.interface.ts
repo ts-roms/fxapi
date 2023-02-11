@@ -5,41 +5,41 @@ import { IMessageOptionsProperties } from 'src/common/message/interfaces/message
 import { Response } from 'express';
 
 export interface IResponseMetadata {
-    statusCode?: number;
-    message?: string;
-    messageProperties?: IMessageOptionsProperties;
-    [key: string]: any;
+  statusCode?: number;
+  message?: string;
+  messageProperties?: IMessageOptionsProperties;
+  [key: string]: any;
 }
 
 export interface IResponseOptions<T> {
-    serialization?: ClassConstructor<T>;
-    messageProperties?: IMessageOptionsProperties;
+  serialization?: ClassConstructor<T>;
+  messageProperties?: IMessageOptionsProperties;
 }
 
 export type IResponsePagingOptions<T> = IResponseOptions<T>;
 
 export interface IResponseExcelOptions<T> extends IResponseOptions<T> {
-    type?: ENUM_HELPER_FILE_TYPE;
+  type?: ENUM_HELPER_FILE_TYPE;
 }
 
 export type IResponseExcel = IHelperFileRows[];
 
 export interface IResponse {
-    _metadata?: IResponseMetadata;
-    [key: string]: any;
+  _metadata?: IResponseMetadata;
+  [key: string]: any;
 }
 
 export interface IResponsePaging<T = Record<string, any>> {
-    totalData: number;
-    totalPage?: number;
-    currentPage?: number;
-    perPage?: number;
-    _availableSearch?: string[];
-    _availableSort?: string[];
-    _metadata?: IResponseMetadata;
-    data: T[];
+  totalData: number;
+  totalPage?: number;
+  currentPage?: number;
+  perPage?: number;
+  _availableSearch?: string[];
+  _availableSort?: string[];
+  _metadata?: IResponseMetadata;
+  data: T[];
 }
 
 export interface IResponseCustom extends Response {
-    body: string;
+  body: string;
 }

@@ -6,10 +6,10 @@ import { PermissionEntity } from 'src/modules/permission/repository/entities/per
 
 @Injectable()
 export class PermissionRepository extends DatabaseMongoUUIDRepositoryAbstract<PermissionEntity> {
-    constructor(
-        @DatabaseModel(PermissionEntity.name)
-        private readonly permissionModel: Model<PermissionEntity>
-    ) {
-        super(permissionModel);
-    }
+  constructor(
+    @DatabaseModel(PermissionEntity.name)
+    private readonly permissionModel: Model<PermissionEntity>
+  ) {
+    super(permissionModel);
+  }
 }

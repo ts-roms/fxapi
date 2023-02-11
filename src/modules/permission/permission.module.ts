@@ -4,9 +4,9 @@ import { PermissionEnumService } from 'src/modules/permission/services/permissio
 import { PermissionService } from './services/permission.service';
 
 @Module({
-    controllers: [],
-    providers: [PermissionService, PermissionEnumService],
-    exports: [PermissionService, PermissionEnumService],
-    imports: [PermissionRepositoryModule],
+  controllers: [],
+  providers: [PermissionService, PermissionEnumService],
+  exports: [PermissionService, PermissionEnumService],
+  imports: [PermissionRepositoryModule],
 })
 export class PermissionModule {}

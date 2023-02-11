@@ -1,3 +1,3 @@
 export interface IRoleEnumService {
-    getAccessFor(): Promise<string[]>;
+  getAccessFor(): Promise<string[]>;
 }

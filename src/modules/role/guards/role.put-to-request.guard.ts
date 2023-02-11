@@ -4,19 +4,21 @@ import { RoleService } from 'src/modules/role/services/role.service';
 
 @Injectable()
 export class RolePutToRequestGuard implements CanActivate {
-    constructor(private readonly roleService: RoleService) {}
+  constructor(private readonly roleService: RoleService) {}
 
-    async canActivate(context: ExecutionContext): Promise<boolean> {
-        const request = context.switchToHttp().getRequest();
-        const { params } = request;
-        const { role } = params;
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    const request = context.switchToHttp().getRequest();
+    const { params } = request;
+    const { role } = params;
 
-        const check: IRoleEntity =
-            await this.roleService.findOneById<IRoleEntity>(role, {
-                join: true,
-            });
-        request.__role = check;
+    const check: IRoleEntity = await this.roleService.findOneById<IRoleEntity>(
+      role,
+      {
+        join: true,
+      }
+    );
+    request.__role = check;
 
-        return true;
-    }
+    return true;
+  }
 }

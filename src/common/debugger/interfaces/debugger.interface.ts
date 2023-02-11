@@ -1,17 +1,17 @@
 import { RotatingFileStream } from 'rotating-file-stream';
 
 export interface IDebuggerLog {
-    description: string;
-    class?: string;
-    function?: string;
-    path?: string;
+  description: string;
+  class?: string;
+  function?: string;
+  path?: string;
 }
 
 export interface IDebuggerHttpConfigOptions {
-    readonly stream: RotatingFileStream;
+  readonly stream: RotatingFileStream;
 }
 
 export interface IDebuggerHttpConfig {
-    readonly debuggerHttpFormat: string;
-    readonly debuggerHttpOptions?: IDebuggerHttpConfigOptions;
+  readonly debuggerHttpFormat: string;
+  readonly debuggerHttpOptions?: IDebuggerHttpConfigOptions;
 }

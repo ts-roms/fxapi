@@ -4,18 +4,20 @@ import { UserService } from 'src/modules/user/services/user.service';
 
 @Injectable()
 export class UserPayloadPutToRequestGuard implements CanActivate {
-    constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) {}
 
-    async canActivate(context: ExecutionContext): Promise<boolean> {
-        const request = context.switchToHttp().getRequest();
-        const { user } = request;
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    const request = context.switchToHttp().getRequest();
+    const { user } = request;
 
-        const check: IUserEntity =
-            await this.userService.findOneById<IUserEntity>(user._id, {
-                join: true,
-            });
-        request.__user = check;
+    const check: IUserEntity = await this.userService.findOneById<IUserEntity>(
+      user._id,
+      {
+        join: true,
+      }
+    );
+    request.__user = check;
 
-        return true;
-    }
+    return true;
+  }
 }

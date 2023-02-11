@@ -4,17 +4,18 @@ import { PermissionService } from 'src/modules/permission/services/permission.se
 
 @Injectable()
 export class PermissionPutToRequestGuard implements CanActivate {
-    constructor(private readonly permissionService: PermissionService) {}
+  constructor(private readonly permissionService: PermissionService) {}
 
-    async canActivate(context: ExecutionContext): Promise<boolean> {
-        const request = context.switchToHttp().getRequest();
-        const { params } = request;
-        const { permission } = params;
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    const request = context.switchToHttp().getRequest();
+    const { params } = request;
+    const { permission } = params;
 
-        const check: PermissionEntity =
-            await this.permissionService.findOneById(permission);
-        request.__permission = check;
+    const check: PermissionEntity = await this.permissionService.findOneById(
+      permission
+    );
+    request.__permission = check;
 
-        return true;
-    }
+    return true;
+  }
 }

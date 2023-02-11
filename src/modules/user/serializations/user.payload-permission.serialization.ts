@@ -5,16 +5,16 @@ import { PermissionEntity } from 'src/modules/permission/repository/entities/per
 import { UserGetSerialization } from 'src/modules/user/serializations/user.get.serialization';
 
 export class UserPayloadPermissionSerialization extends PickType(
-    UserGetSerialization,
-    ['_id'] as const
+  UserGetSerialization,
+  ['_id'] as const
 ) {
-    @ApiProperty({
-        example: [faker.name.jobTitle(), faker.name.jobTitle()],
-        type: 'string',
-        isArray: true,
-    })
-    @Transform(
-        ({ value }) => value?.map((val: PermissionEntity) => val.code) ?? []
-    )
-    readonly permissions: string[];
+  @ApiProperty({
+    example: [faker.name.jobTitle(), faker.name.jobTitle()],
+    type: 'string',
+    isArray: true,
+  })
+  @Transform(
+    ({ value }) => value?.map((val: PermissionEntity) => val.code) ?? []
+  )
+  readonly permissions: string[];
 }

@@ -5,9 +5,9 @@ import { SettingService } from './services/setting.service';
 
 @Global()
 @Module({
-    imports: [SettingRepositoryModule, SettingMiddlewareModule],
-    exports: [SettingService],
-    providers: [SettingService],
-    controllers: [],
+  imports: [SettingRepositoryModule, SettingMiddlewareModule],
+  exports: [SettingService],
+  providers: [SettingService],
+  controllers: [],
 })
 export class SettingModule {}

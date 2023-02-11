@@ -7,14 +7,14 @@ import { RoleEntity } from 'src/modules/role/repository/entities/role.entity';
 
 @Injectable()
 export class RoleRepository extends DatabaseMongoUUIDRepositoryAbstract<RoleEntity> {
-    constructor(
-        @DatabaseModel(RoleEntity.name)
-        private readonly roleModel: Model<RoleEntity>
-    ) {
-        super(roleModel, {
-            path: 'permissions',
-            match: '_id',
-            model: PermissionEntity.name,
-        });
-    }
+  constructor(
+    @DatabaseModel(RoleEntity.name)
+    private readonly roleModel: Model<RoleEntity>
+  ) {
+    super(roleModel, {
+      path: 'permissions',
+      match: '_id',
+      model: PermissionEntity.name,
+    });
+  }
 }
