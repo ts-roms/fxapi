@@ -25,7 +25,7 @@ export class BranchService implements IBranchService {
     const create: BranchEntity = new BranchEntity();
     create.name = dto.name;
     create.note = dto.note;
-    create.default = false
+    create.default = dto.default
     return this.branchRepository.create<BranchEntity>(create, options);
   }
 
