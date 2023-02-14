@@ -8,7 +8,7 @@ import { MigrationPermissionSeed } from 'src/migration/seeds/migration.permissio
 import { MigrationRoleSeed } from 'src/migration/seeds/migration.role.seed';
 import { MigrationSettingSeed } from 'src/migration/seeds/migration.setting.seed';
 import { MigrationUserSeed } from 'src/migration/seeds/migration.user.seed';
-import { EmployeeModule } from 'src/modules/employee/employee.module';
+import { EmployeeModule } from 'src/modules/system/employee/employee.module';
 import { PermissionModule } from 'src/modules/permission/permission.module';
 import { RoleModule } from 'src/modules/role/role.module';
 import { UserModule } from 'src/modules/user/user.module';
