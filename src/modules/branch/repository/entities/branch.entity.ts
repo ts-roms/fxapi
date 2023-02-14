@@ -20,7 +20,6 @@ export class BranchEntity extends DatabaseMongoUUIDEntityAbstract {
     required: false,
     index: true,
     trim: true,
-    unique: true,
     type: String,
   })
   note: string;
@@ -29,7 +28,6 @@ export class BranchEntity extends DatabaseMongoUUIDEntityAbstract {
     required: true,
     index: true,
     trim: true,
-    unique: true,
     type: Boolean,
   })
   default: boolean
