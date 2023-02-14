@@ -3,6 +3,7 @@ import { ApiKeyModule } from 'src/common/api-key/api-key.module';
 import { ApiKeyAdminController } from 'src/common/api-key/controllers/api-key.admin.controller';
 import { AuthModule } from 'src/common/auth/auth.module';
 import { SettingAdminController } from 'src/common/setting/controllers/setting.admin.controller';
+import { BranchModule } from 'src/modules/branch/branch.module';
 import { EmployeeModule } from 'src/modules/employee/employee.module';
 import { PermissionAdminController } from 'src/modules/permission/controllers/permission.admin.controller';
 import { PermissionModule } from 'src/modules/permission/permission.module';
@@ -27,7 +28,8 @@ import { UserModule } from 'src/modules/user/user.module';
     UserModule,
     AuthModule,
     ApiKeyModule,
-    EmployeeModule
+    EmployeeModule,
+    BranchModule
   ],
 })
 export class RoutesAdminModule { }
