@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { CallbackWithoutResultAndOptionalError } from 'mongoose';
 import { DatabaseMongoUUIDEntityAbstract } from "src/common/database/abstracts/mongo/entities/database.mongo.uuid.entity.abstract";
 import { DatabaseEntity } from "src/common/database/decorators/database.decorator";
+import { ContactDetailsEntity } from './contact-details.entity';
 
 export const EmployeeDatabaseName = 'employees';
 
@@ -59,9 +60,9 @@ export class EmployeeEntity extends DatabaseMongoUUIDEntityAbstract {
     required: true,
     index: true,
     trim: true,
-    type: Date,
+    type: String,
   })
-  dob: Date;
+  dob: string;
 
   @Prop({
     required: false,
@@ -86,11 +87,18 @@ export class EmployeeEntity extends DatabaseMongoUUIDEntityAbstract {
     type: Boolean,
   })
   blocked: boolean;
+  
   @Prop({
     required: false,
     type: Date,
   })
   blockedDate?: boolean;
+
+  @Prop({
+    required: false,
+    type: ContactDetailsEntity
+  })
+  contactDetails: ContactDetailsEntity
 }
 
 export const EmployeeSchema = SchemaFactory.createForClass(EmployeeEntity);
