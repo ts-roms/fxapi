@@ -20,7 +20,6 @@ export class EmployeeEntity extends DatabaseMongoUUIDEntityAbstract {
     required: true,
     index: true,
     trim: true,
-    lowercase: true,
     type: String,
     maxlength: 50
   })
@@ -30,7 +29,6 @@ export class EmployeeEntity extends DatabaseMongoUUIDEntityAbstract {
     required: true,
     index: true,
     trim: true,
-    lowercase: true,
     type: String,
     maxlength: 50
   })
@@ -40,7 +38,6 @@ export class EmployeeEntity extends DatabaseMongoUUIDEntityAbstract {
     required: false,
     index: true,
     trim: true,
-    lowercase: true,
     type: String,
     maxlength: 50
   })
@@ -50,7 +47,6 @@ export class EmployeeEntity extends DatabaseMongoUUIDEntityAbstract {
     required: true,
     index: true,
     trim: true,
-    lowercase: true,
     type: String,
     maxlength: 50
   })

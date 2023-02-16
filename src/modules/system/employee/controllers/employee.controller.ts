@@ -8,11 +8,11 @@ import { PaginationQuery, PaginationQueryFilterInBoolean } from "src/common/pagi
 import { PaginationListDto } from "src/common/pagination/dtos/pagination.list.dto";
 import { PaginationService } from "src/common/pagination/services/pagination.service";
 import { Response, ResponsePaging } from "src/common/response/decorators/response.decorator";
-import { IResponse, IResponsePaging } from "src/common/response/interfaces/response.interface";
+import { IResponsePaging } from "src/common/response/interfaces/response.interface";
 import {
-  EMPLOPYEE_DEFAULT_AVAILABLE_SORT,
-  EMPLOPYEE_DEFAULT_PER_PAGE,
-  EMPLOPYEE_DEFAULT_SORT,
+  EMPLOYEE_DEFAULT_AVAILABLE_SORT,
+  EMPLOYEE_DEFAULT_PER_PAGE,
+  EMPLOYEE_DEFAULT_SORT,
   EMPLOYEE_DEFAULT_AVAILABLE_SEARCH,
   EMPLOYEE_DEFAULT_BLOCKED,
   EMPLOYEE_DEFAULT_IS_ACTIVE
@@ -68,10 +68,10 @@ export class EmployeeController {
   @Get('/list')
   async list(
     @PaginationQuery(
-      EMPLOPYEE_DEFAULT_PER_PAGE,
+      EMPLOYEE_DEFAULT_PER_PAGE,
       EMPLOYEE_DEFAULT_AVAILABLE_SEARCH,
-      EMPLOPYEE_DEFAULT_SORT,
-      EMPLOPYEE_DEFAULT_AVAILABLE_SORT
+      EMPLOYEE_DEFAULT_SORT,
+      EMPLOYEE_DEFAULT_AVAILABLE_SORT
     )
     {
       page,

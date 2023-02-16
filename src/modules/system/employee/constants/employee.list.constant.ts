@@ -1,6 +1,6 @@
-export const EMPLOPYEE_DEFAULT_PER_PAGE = 20;
-export const EMPLOPYEE_DEFAULT_SORT = 'createdAt@asc';
-export const EMPLOPYEE_DEFAULT_AVAILABLE_SORT = [
+export const EMPLOYEE_DEFAULT_PER_PAGE = 20;
+export const EMPLOYEE_DEFAULT_SORT = 'createdAt@asc';
+export const EMPLOYEE_DEFAULT_AVAILABLE_SORT = [
   'firstName',
   'lastName',
   'createdAt',

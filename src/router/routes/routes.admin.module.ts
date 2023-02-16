@@ -11,6 +11,7 @@ import { RoleAdminController } from 'src/modules/role/controllers/role.admin.con
 import { RoleModule } from 'src/modules/role/role.module';
 import { UserAdminController } from 'src/modules/user/controllers/user.admin.controller';
 import { UserModule } from 'src/modules/user/user.module';
+import { AccountingModule } from 'src/modules/configuration/accounting/accounting.module';
 
 @Module({
   controllers: [
@@ -29,7 +30,8 @@ import { UserModule } from 'src/modules/user/user.module';
     AuthModule,
     ApiKeyModule,
     EmployeeModule,
-    BranchModule
+    BranchModule,
+    AccountingModule
   ],
 })
 export class RoutesAdminModule { }

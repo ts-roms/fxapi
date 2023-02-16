@@ -1,7 +1,7 @@
 import { applyDecorators, HttpStatus } from "@nestjs/common";
 import { Doc, DocPaging } from "src/common/doc/decorators/doc.decorator";
 import { EmployeeDocQueryBlocked, EmployeeDocQueryIsActive } from "../constants/employee.docs.constant";
-import { EMPLOPYEE_DEFAULT_AVAILABLE_SORT, EMPLOYEE_DEFAULT_AVAILABLE_SEARCH } from "../constants/employee.list.constant";
+import { EMPLOYEE_DEFAULT_AVAILABLE_SORT, EMPLOYEE_DEFAULT_AVAILABLE_SEARCH } from "../constants/employee.list.constant";
 import { EmployeeListSerialization } from "../serializations/employee.list.serialization";
 
 
@@ -30,7 +30,7 @@ export function EmployeeListDoc(): MethodDecorator {
       },
       response: {
         serialization: EmployeeListSerialization,
-        _availableSort: EMPLOPYEE_DEFAULT_AVAILABLE_SORT,
+        _availableSort: EMPLOYEE_DEFAULT_AVAILABLE_SORT,
         _availableSearch: EMPLOYEE_DEFAULT_AVAILABLE_SEARCH
       }
     })

@@ -13,6 +13,8 @@ import { EmployeeModule } from 'src/modules/system/employee/employee.module';
 import { RoleModule } from 'src/modules/role/role.module';
 import { UserController } from 'src/modules/user/controllers/user.controller';
 import { UserModule } from 'src/modules/user/user.module';
+import { AccountingModule } from 'src/modules/configuration/accounting/accounting.module';
+import { AccountingController } from 'src/modules/configuration/accounting/controllers/accounting.controller';
 
 @Module({
   controllers: [
@@ -21,7 +23,8 @@ import { UserModule } from 'src/modules/user/user.module';
     UserController,
     MessageController,
     EmployeeController,
-    BranchController
+    BranchController,
+    AccountingController
   ],
   providers: [],
   exports: [],
@@ -33,7 +36,8 @@ import { UserModule } from 'src/modules/user/user.module';
     HealthModule,
     RoleModule,
     EmployeeModule,
-    BranchModule
+    BranchModule,
+    AccountingModule
   ],
 })
 export class RoutesModule {}
